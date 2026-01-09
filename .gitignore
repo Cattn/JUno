@@ -1,0 +1,7 @@
+/.mvn/
+/target/
+*.gitattributes
+*.iml
+*.log
+*.class
+*.jar
