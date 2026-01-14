@@ -1,0 +1,17 @@
+{
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "JUno",
+            "request": "launch",
+            "mainClass": "juno.JUno",
+            "classPaths": [
+                "${workspaceFolder}/target/classes"
+            ],
+            "sourcePaths": [
+                "${workspaceFolder}/src/main/java"
+            ]
+        }
+    ]
+}
