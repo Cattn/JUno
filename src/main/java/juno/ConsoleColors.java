@@ -1,4 +1,4 @@
-package juno.application;
+package juno;
 
 public class ConsoleColors
 {
