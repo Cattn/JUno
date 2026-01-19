@@ -9,18 +9,7 @@ public class Deck
     
     public Deck()
     {
-        int index = 0;
-
         for(int i = 0; i < Card.cards.length; i++)
-        {
-            if(!Card.cards[i].equals("X"))
-            {
-                index = i;
-                break;
-            }
-        }
-
-        for(int i = index; i < Card.cards.length; i++)
         {
             deck.add(new Card());
         }
@@ -32,7 +21,7 @@ public class Deck
     {
 		if (!deck.isEmpty())
 		{
-			return deck.remove(deck.size() - 1);
+			return deck.remove(0);
 		}
 		else
 		{
@@ -42,7 +31,7 @@ public class Deck
 	
 	public void dealCards(Player p)
 	{
-	    for(int i = 0; i < 6; i++)
+	    for(int i = 0; i < 7; i++)
 	    {
     	    int randIndex = (int) (Math.random() * deck.size());
             String randomCard = deck.get(randIndex).toString();

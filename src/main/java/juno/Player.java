@@ -6,11 +6,17 @@ public class Player
 {
 	private Hand hand;
 	private int playerID;
+	private String playerName;
 	
 	public Player(int playerID)
 	{
 	    hand = new Hand();
 	    this.playerID = playerID;
+	}
+	
+	public void setPlayerName(String playerName)
+	{
+	    this.playerName = playerName;
 	}
 	
 	public ArrayList<Card> getCards()
@@ -28,9 +34,19 @@ public class Player
 	    return playerID;
 	}
 	
+	public String getPlayerName()
+	{
+	    return playerName;
+	}
+	
 	public boolean hasWon()
 	{
 	    return getCards().isEmpty();
+	}
+
+	public boolean hasUno()
+	{
+		return getCards().size() == 1;
 	}
 
     public void printCards()
