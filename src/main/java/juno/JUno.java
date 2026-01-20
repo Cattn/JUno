@@ -1,5 +1,6 @@
 package juno;
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class JUno
 {
@@ -7,27 +8,41 @@ public class JUno
     public static Deck deck = new Deck();
 
     public static void main(String[] args)
-    {        
-        Player player1 = new Player(1);
-        player1.setPlayerName("Logan");
-        players.add(player1);
-        Player player2 = new Player(2);
-        player2.setPlayerName("Daniel");
-        players.add(player2);
-        Player player3 = new Player(3);
-        player3.setPlayerName("Player 3");
-        players.add(player3);
-        Player player4 = new Player(4);
-        player4.setPlayerName("Player 4");
-        players.add(player4);
-        
-        Game game = new Game(players);
-        game.startGame(players);
+    {
+        Scanner input = new Scanner(System.in);
 
-        for (Player player : game.getPlayers())
+        System.out.println("Welcome to JUno!\n");
+
+        System.out.print("Enter number of players: ");
+        int numPlayers = input.nextInt();
+
+        if(numPlayers < 2 || numPlayers > 4)
         {
-            System.out.println(player.getPlayerName() + " has " + player.getCards().size() + " cards.");
-            player.printCards();
+            System.out.println("Invalid number of players. Please enter a number between 2 and 4.");
+            input.close();
+            return;
         }
+        else
+        {
+            for(int i = 1; i <= numPlayers; i++)
+            {
+                System.out.print("Enter name for Player " + i + ": ");
+                String name = input.next();
+                Player player = new Player(i);
+                player.setPlayerName(name);
+                players.add(player);
+            }
+            
+            Game game = new Game(players);
+            game.startGame(players);
+
+            for (Player player : game.getPlayers())
+            {
+                System.out.println(player.getPlayerName() + " has " + player.getCards().size() + " cards.");
+                player.printCards();
+            }
+        }
+
+        input.close();
     }
 }
