@@ -9,9 +9,12 @@ public class Deck
     
     public Deck()
     {
-        for(int i = 0; i < Card.cards.length; i++)
+        for(int i = 1; i <= 3; i++)
         {
-            deck.add(new Card());
+            for(int j = 0; j < Card.cards.length; j++)
+            {
+                deck.add(new Card());
+            }
         }
         
         Collections.shuffle(deck);
