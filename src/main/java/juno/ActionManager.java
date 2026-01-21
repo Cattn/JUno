@@ -9,13 +9,18 @@ public class ActionManager
         game = g;
     }
 
-    public static void drawTwoCards(Player player)
+    public void drawCard(Player player)
+    {
+        player.getCards().add(JUno.deck.draw());
+    }
+
+    public void drawTwoCards(Player player)
     {
         player.getCards().add(JUno.deck.draw());
         player.getCards().add(JUno.deck.draw());
     }
 
-    public static void drawFourCards(Player player)
+    public void drawFourCards(Player player)
     {
         player.getCards().add(JUno.deck.draw());
         player.getCards().add(JUno.deck.draw());
@@ -23,12 +28,12 @@ public class ActionManager
         player.getCards().add(JUno.deck.draw());
     }
 
-    public static void skipTurn(Player player)
+    public void skipTurn(Player player)
     {
         game.nextPlayer();
     }
 
-    public static void reverse()
+    public void reverse()
     {
         game.reverseDirection();
     }
