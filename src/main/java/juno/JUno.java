@@ -16,9 +16,9 @@ public class JUno
         System.out.print("Enter number of players: ");
         int numPlayers = input.nextInt();
 
-        if(numPlayers < 2 || numPlayers > 5)
+        if(numPlayers < 2 || numPlayers > 10)
         {
-            System.out.println("Invalid number of players. Please enter a number between 2 and 5.");
+            System.out.println("Invalid number of players. Please enter a number between 2 and 10.");
             input.close();
             return;
         }
