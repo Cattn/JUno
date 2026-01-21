@@ -42,6 +42,28 @@ public class JUno
             {
                 System.out.println(player.getPlayerName() + " has " + player.getCards().size() + " cards.");
                 player.printCards();
+
+                System.out.println(player.getPlayerName() + ", enter your move: ");
+                String move = input.next();
+
+                // TODO: Implement move validation
+
+                // if(move.startsWith("P"))
+                // {
+                //     game.getAction().drawCard(player);
+                // }
+                // else if(move.equals("S"))
+                // {
+                //     game.getAction().skipTurn(player);
+                // }
+                // else if(move.equals("reverse"))
+                // {
+                //     game.reverseDirection();
+                // }
+                // else if(move.equals("uno"))
+                // {
+                //     //game.uno(player);
+                // }
             }
         }
 
