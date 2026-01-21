@@ -16,9 +16,9 @@ public class JUno
         System.out.print("Enter number of players: ");
         int numPlayers = input.nextInt();
 
-        if(numPlayers < 2 || numPlayers > 4)
+        if(numPlayers < 2 || numPlayers > 5)
         {
-            System.out.println("Invalid number of players. Please enter a number between 2 and 4.");
+            System.out.println("Invalid number of players. Please enter a number between 2 and 5.");
             input.close();
             return;
         }
@@ -36,6 +36,8 @@ public class JUno
             Game game = new Game(players);
             game.startGame(players);
 
+            clearScreen();
+
             for (Player player : game.getPlayers())
             {
                 System.out.println(player.getPlayerName() + " has " + player.getCards().size() + " cards.");
@@ -44,5 +46,10 @@ public class JUno
         }
 
         input.close();
+    }
+
+    public static void clearScreen()
+    {
+        System.out.print("\033[H\033[2J");
     }
 }
