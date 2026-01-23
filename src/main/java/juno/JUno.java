@@ -43,6 +43,9 @@ public class JUno
                 System.out.println(player.getPlayerName() + " has " + player.getCards().size() + " cards.");
                 player.printCards();
 
+                Card startingCard = game.getStartingCard();
+                System.out.println("The starting card is: " + startingCard.toString());
+
                 System.out.println(player.getPlayerName() + ", enter your move: ");
                 String move = input.next();
 
