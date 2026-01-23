@@ -54,7 +54,7 @@ public class Game {
         return players;
     }
 
-    public Card getStartingCard()
+    public Card getTopCard()
     {
         return JUno.deck.draw();
     }
