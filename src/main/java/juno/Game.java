@@ -24,7 +24,18 @@ public class Game {
             JUno.deck.dealCards(player);
         }
         this.action = new ActionManager(this);
-        this.topCard = JUno.deck.draw();
+        Card c;
+        do {
+            c = JUno.deck.draw();
+            if (c == null)
+                throw new IllegalStateException("Deck empty at game start");
+            if (c.isWildOrDrawCard())
+                JUno.deck.add(c);
+            else {
+                this.topCard = c;
+                break;
+            }
+        } while (true);
     }
 
     public void nextPlayer()
