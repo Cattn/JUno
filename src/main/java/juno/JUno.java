@@ -6,12 +6,13 @@ public class JUno
 {
     public static ArrayList<Player> players = new ArrayList<Player>();
     public static Deck deck = new Deck();
-    public static Card topCard;
+    //public static Card topCard;
 
     public static void main(String[] args)
     {
         Scanner input = new Scanner(System.in);
 
+        clearScreen();
         System.out.println("Welcome to JUno!\n");
 
         System.out.print("Enter number of players: ");
@@ -37,37 +38,43 @@ public class JUno
             Game game = new Game(players);
             game.startGame(players);
 
-            clearScreen();
+            //clearScreen();
 
             for (Player player : game.getPlayers())
             {
-                System.out.println(player.getPlayerName() + " has " + player.getCards().size() + " cards.");
-                player.printCards();
+                clearScreen();
 
-                topCard = game.getTopCard();
-                System.out.println("The top card is: " + topCard.toString());
+                clearScreen();
+                System.out.print("It is " + player.getPlayerName() + "'s turn. Press Enter when ready. ");
+                input.nextLine();
+                clearScreen();
 
-                System.out.println(player.getPlayerName() + ", enter your move: ");
-                String move = input.next();
+                System.out.println("The top card is: " + game.getTopCard().toString());
 
-                // TODO: Implement move validation
-
-                // if(move.startsWith("P"))
-                // {
-                //     game.getAction().drawCard(player);
-                // }
-                // else if(move.equals("S"))
-                // {
-                //     game.getAction().skipTurn(player);
-                // }
-                // else if(move.equals("reverse"))
-                // {
-                //     game.reverseDirection();
-                // }
-                // else if(move.equals("uno"))
-                // {
-                //     //game.uno(player);
-                // }
+                System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size() + ", 0 to draw a card): ");
+                int move = input.nextInt();
+                if(move == 0)
+                {
+                    game.getAction().drawCard(player);
+                }
+                else if(move > 0 && move <= player.getCards().size())
+                {
+                    Card card = player.getCards().get(move - 1);
+                    if(game.isValidMove(card))
+                    {
+                        player.getCards().remove(card);
+                        game.setTopCard(card);
+                        game.nextPlayer();
+                    }
+                    else
+                    {
+                        System.out.println("Invalid move. Please try again.");
+                    }
+                }
+                else
+                {
+                    System.out.println("Invalid move. Please try again.");
+                }
             }
         }
 

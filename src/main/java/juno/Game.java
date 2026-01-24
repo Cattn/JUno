@@ -8,6 +8,7 @@ public class Game {
     private Integer currentPlayerIndex;
     private ActionManager action;
     private boolean isReversed;
+    private Card topCard;
 
     public Game(ArrayList<Player> players)
     {
@@ -23,6 +24,7 @@ public class Game {
             JUno.deck.dealCards(player);
         }
         this.action = new ActionManager(this);
+        this.topCard = JUno.deck.draw();
     }
 
     public void nextPlayer()
@@ -37,6 +39,16 @@ public class Game {
         } else if (this.currentPlayerIndex < 0) {
             this.currentPlayerIndex = this.players.size() - 1;
         }
+    }
+
+    public boolean isValidMove(Card card)
+    {
+        return card.getColor().equals(topCard.getColor()) || card.getValue().equals(topCard.getValue()) || card.toString().equals(topCard.toString());
+    }
+
+    public void setTopCard(Card card)
+    {
+        this.topCard = card;
     }
 
     public void reverseDirection()
@@ -56,6 +68,6 @@ public class Game {
 
     public Card getTopCard()
     {
-        return JUno.deck.draw();
+        return topCard;
     }
 }
