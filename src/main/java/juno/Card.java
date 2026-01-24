@@ -38,9 +38,20 @@ public class Card {
         return cards[card].substring(0, 1);
     }
 
-    public Integer getValue()
+    public int getValue()
     {
-        return Integer.parseInt(cards[card].substring(1));
+        String cardStr = cards[card];
+        if (cardStr.equals("W") || cardStr.startsWith("W"))
+            return 13;  // Wild
+        if (cardStr.equals("P4"))
+            return 14;  // Wild Draw 4
+        String suffix = cardStr.substring(1);
+        switch (suffix) {
+            case "R": return 10;  // Reverse
+            case "S": return 11;  // Skip
+            case "P": return 12;  // Draw 2
+            default:  return Integer.parseInt(suffix);  // 0–9
+        }
     }
 
     public void setWildcardColor(String c, String color)

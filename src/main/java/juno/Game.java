@@ -43,7 +43,7 @@ public class Game {
 
     public boolean isValidMove(Card card)
     {
-        return card.getColor().equals(topCard.getColor()) || card.getValue().equals(topCard.getValue()) || card.toString().equals(topCard.toString());
+        return card.getColor().equals(topCard.getColor()) || card.getValue() == topCard.getValue() || card.toString().equals(topCard.toString());
     }
 
     public void setTopCard(Card card)
