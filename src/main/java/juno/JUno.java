@@ -6,7 +6,6 @@ public class JUno
 {
     public static ArrayList<Player> players = new ArrayList<Player>();
     public static Deck deck = new Deck();
-    //public static Card topCard;
 
     public static void main(String[] args)
     {
@@ -38,8 +37,6 @@ public class JUno
             Game game = new Game(players);
             game.startGame(players);
 
-            //clearScreen();
-
             for (Player player : game.getPlayers())
             {
                 clearScreen();
@@ -51,7 +48,6 @@ public class JUno
 
                 System.out.println("The top card is: " + game.getTopCard().toString());
 
-                //System.out.print(player.getPlayerName() + ", you have the following cards: ");
                 System.out.println(player.getCards());
 
                 System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size() + ", 0 to draw a card): ");
