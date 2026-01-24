@@ -51,6 +51,9 @@ public class JUno
 
                 System.out.println("The top card is: " + game.getTopCard().toString());
 
+                //System.out.print(player.getPlayerName() + ", you have the following cards: ");
+                System.out.println(player.getCards());
+
                 System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size() + ", 0 to draw a card): ");
                 int move = input.nextInt();
                 if(move == 0)
@@ -70,10 +73,6 @@ public class JUno
                     {
                         System.out.println("Invalid move. Please try again.");
                     }
-                }
-                else
-                {
-                    System.out.println("Invalid move. Please try again.");
                 }
             }
         }
