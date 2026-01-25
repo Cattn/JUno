@@ -9,17 +9,20 @@ public class Game {
     private ActionManager action;
     private boolean isReversed;
     private Card topCard;
+    private boolean isOver;
 
     public Game(ArrayList<Player> players)
     {
         this.players = players;
         this.currentPlayerIndex = 0;
         this.isReversed = false;
+        this.isOver = false;
     }
 
     public void startGame(ArrayList<Player> players)
     {
         this.players = players;
+        this.isOver = false;
         for (Player player : players) {
             JUno.deck.dealCards(player);
         }
@@ -70,6 +73,16 @@ public class Game {
     public ActionManager getAction()
     {
         return action;
+    }
+
+    public boolean isGameOver()
+    {
+        return isOver || players.size() <= 1;
+    }
+
+    public void endGame()
+    {
+        this.isOver = true;
     }
 
     public ArrayList<Player> getPlayers()

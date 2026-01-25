@@ -44,10 +44,10 @@ public class Player
 	    return getCards().isEmpty();
 	}
 
-	public boolean hasUno()
-	{
-		return getCards().size() == 1;
-	}
+	// public boolean hasUno()
+	// {
+	// 	return getCards().size() == 1;
+	// }
 
     public void printCards()
 	{

@@ -38,52 +38,86 @@ public class JUno
             Game game = new Game(players);
             game.startGame(players);
 
-            for (Player player : game.getPlayers())
+            while (!game.isGameOver())
             {
-                boolean turnComplete = false;
-
-                clearScreen();
-                System.out.print("It is " + player.getPlayerName() + "'s turn. Press Enter when ready. ");
-                input.nextLine();
-                clearScreen();
-
-                while (!turnComplete)
+                for (int i = 0; i < game.getPlayers().size(); i++)
                 {
-                    System.out.println("The top card is: " + game.getTopCard().toString());
+                    Player player = game.getPlayers().get(i);
+                    boolean turnComplete = false;
 
-                    System.out.println(player.getCards());
-
-                    System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size() + ", 0 to draw a card): ");
-                    int move = input.nextInt();
+                    clearScreen();
+                    System.out.print("It is " + player.getPlayerName() + "'s turn. Press Enter when ready. ");
                     input.nextLine();
-                    if(move == 0)
+                    clearScreen();
+
+                    while (!turnComplete)
                     {
-                        game.getAction().drawCard(player);
-                        turnComplete = true;
-                    }
-                    else if(move > 0 && move <= player.getCards().size())
-                    {
-                        Card card = player.getCards().get(move - 1);
-                        if(game.isValidMove(card))
+                        System.out.println("The top card is: " + game.getTopCard().toString());
+
+                        System.out.println(player.getCards());
+
+                        System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size() + ", 0 to draw a card): ");
+                        int move = input.nextInt();
+                        input.nextLine();
+                        if(move == 0)
                         {
-                            player.getCards().remove(card);
-                            game.setTopCard(card);
-                            game.nextPlayer();
+                            game.getAction().drawCard(player);
                             turnComplete = true;
+                        }
+                        else if(move > 0 && move <= player.getCards().size())
+                        {
+                            Card card = player.getCards().get(move - 1);
+                            if(game.isValidMove(card))
+                            {
+                                player.getCards().remove(card);
+                                game.setTopCard(card);
+                                game.nextPlayer();
+                                turnComplete = true;
+                            }
+                            else
+                            {
+                                System.out.println("Invalid move. Please try again.");
+                            }
                         }
                         else
                         {
                             System.out.println("Invalid move. Please try again.");
                         }
                     }
-                    else
+
+                    if (player.hasWon())
                     {
-                        System.out.println("Invalid move. Please try again.");
+                        System.out.println(player.getPlayerName() + " has won!");
+
+                        if (game.getPlayers().size() <= 1)
+                        {
+                            game.endGame();
+                            break;
+                        }
+
+                        System.out.print("Continue with remaining players? (y/n): ");
+                        String continueInput = input.nextLine().trim().toLowerCase();
+                        if (!continueInput.equals("y") && !continueInput.equals("yes"))
+                        {
+                            game.endGame();
+                            break;
+                        }
+
+                        game.getPlayers().remove(i);
+                        i--;
+
+                        if (game.getPlayers().size() <= 1)
+                        {
+                            game.endGame();
+                            break;
+                        }
                     }
                 }
             }
-        }
 
+            
+        }
+        
         input.close();
     }
 
