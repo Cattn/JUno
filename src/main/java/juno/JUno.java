@@ -16,6 +16,7 @@ public class JUno
 
         System.out.print("Enter number of players: ");
         int numPlayers = input.nextInt();
+        input.nextLine();
 
         if(numPlayers < 2 || numPlayers > 10)
         {
@@ -39,31 +40,41 @@ public class JUno
 
             for (Player player : game.getPlayers())
             {
-                clearScreen();
+                boolean turnComplete = false;
 
                 clearScreen();
                 System.out.print("It is " + player.getPlayerName() + "'s turn. Press Enter when ready. ");
                 input.nextLine();
                 clearScreen();
 
-                System.out.println("The top card is: " + game.getTopCard().toString());
-
-                System.out.println(player.getCards());
-
-                System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size() + ", 0 to draw a card): ");
-                int move = input.nextInt();
-                if(move == 0)
+                while (!turnComplete)
                 {
-                    game.getAction().drawCard(player);
-                }
-                else if(move > 0 && move <= player.getCards().size())
-                {
-                    Card card = player.getCards().get(move - 1);
-                    if(game.isValidMove(card))
+                    System.out.println("The top card is: " + game.getTopCard().toString());
+
+                    System.out.println(player.getCards());
+
+                    System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size() + ", 0 to draw a card): ");
+                    int move = input.nextInt();
+                    input.nextLine();
+                    if(move == 0)
                     {
-                        player.getCards().remove(card);
-                        game.setTopCard(card);
-                        game.nextPlayer();
+                        game.getAction().drawCard(player);
+                        turnComplete = true;
+                    }
+                    else if(move > 0 && move <= player.getCards().size())
+                    {
+                        Card card = player.getCards().get(move - 1);
+                        if(game.isValidMove(card))
+                        {
+                            player.getCards().remove(card);
+                            game.setTopCard(card);
+                            game.nextPlayer();
+                            turnComplete = true;
+                        }
+                        else
+                        {
+                            System.out.println("Invalid move. Please try again.");
+                        }
                     }
                     else
                     {
