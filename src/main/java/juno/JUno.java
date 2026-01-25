@@ -57,8 +57,25 @@ public class JUno
                         System.out.println(player.getCards());
 
                         System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size() + ", 0 to draw a card): ");
-                        int move = input.nextInt();
-                        input.nextLine();
+                        int move;
+                        try
+                        {
+                            move = input.nextInt();
+                            input.nextLine();
+                        }
+                        catch (java.util.InputMismatchException e)
+                        {
+                            System.out.println("Invalid input. Please enter a number.");
+                            input.nextLine();
+                            continue;
+                        }
+                        catch (java.lang.NumberFormatException e)
+                        {
+                            System.out.println("Invalid input. Please enter a number.");
+                            input.nextLine();
+                            continue;
+                        }
+                        
                         if(move == 0)
                         {
                             game.getAction().drawCard(player);
@@ -114,8 +131,6 @@ public class JUno
                     }
                 }
             }
-
-            
         }
         
         input.close();
