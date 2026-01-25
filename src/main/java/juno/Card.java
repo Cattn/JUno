@@ -54,15 +54,20 @@ public class Card {
         }
     }
 
-    public boolean isWildOrDrawCard()
+    public boolean isActionCard()
     {
         int v = getValue();
-        return v == 12 || v == 13 || v == 14;  // Draw 2, Wild, Wild Draw 4
+        return v >= 10 && v <= 14; // Reverse, Skip, Draw 2, Wild, Wild Draw 4
     }
 
     public void setWildcardColor(String c, String color)
     {
         cards[findIndex(c)] = "W" + color;
+    }
+
+    public void setPlusFourColor(String c, String color)
+    {
+        cards[findIndex(c)] = "P4" + color;
     }
 
     public String toString() {

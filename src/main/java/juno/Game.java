@@ -29,7 +29,7 @@ public class Game {
             c = JUno.deck.draw();
             if (c == null)
                 throw new IllegalStateException("Deck empty at game start");
-            if (c.isWildOrDrawCard())
+            if (c.isActionCard())
                 JUno.deck.add(c);
             else {
                 this.topCard = c;
