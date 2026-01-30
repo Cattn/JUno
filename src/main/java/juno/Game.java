@@ -74,6 +74,10 @@ public class Game {
 
     public boolean isValidMove(Card card)
     {
+        String cardStr = card.toString();
+        if (cardStr.equals("W") || cardStr.startsWith("W") || cardStr.equals("P4") || cardStr.startsWith("P4")) {
+            return true;
+        }
         return card.getColor().equals(topCard.getColor()) || card.getValue() == topCard.getValue() || card.toString().equals(topCard.toString());
     }
 
