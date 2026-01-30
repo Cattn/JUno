@@ -6,9 +6,8 @@ public class Game {
 
     private ArrayList<Player> players;
     private Integer currentPlayerIndex;
-    private ActionManager action;
     private boolean isReversed;
-    private Card topCard;
+    private Card topCard;   
     private boolean isOver;
 
     public Game(ArrayList<Player> players)
@@ -26,7 +25,6 @@ public class Game {
         for (Player player : players) {
             JUno.deck.dealCards(player);
         }
-        this.action = new ActionManager(this);
         Card c;
         do {
             c = JUno.deck.draw();
@@ -39,6 +37,25 @@ public class Game {
                 break;
             }
         } while (true);
+    }
+    
+    public void drawCard(Player player)
+    {
+        player.getCards().add(JUno.deck.draw());
+    }
+
+    public void drawTwoCards(Player player)
+    {
+        player.getCards().add(JUno.deck.draw());
+        player.getCards().add(JUno.deck.draw());
+    }
+
+    public void drawFourCards(Player player)
+    {
+        player.getCards().add(JUno.deck.draw());
+        player.getCards().add(JUno.deck.draw());
+        player.getCards().add(JUno.deck.draw());
+        player.getCards().add(JUno.deck.draw());
     }
 
     public void nextPlayer()
@@ -70,9 +87,14 @@ public class Game {
         this.isReversed = !this.isReversed;
     }
 
-    public ActionManager getAction()
+    public void skipTurn()
     {
-        return action;
+        this.nextPlayer();
+    }
+
+    public void reverse()
+    {
+        this.reverseDirection();
     }
 
     public boolean isGameOver()

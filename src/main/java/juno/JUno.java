@@ -78,7 +78,7 @@ public class JUno
                         
                         if(move == 0)
                         {
-                            game.getAction().drawCard(player);
+                            game.drawCard(player);
                             turnComplete = true;
                         }
                         else if(move > 0 && move <= player.getCards().size())
