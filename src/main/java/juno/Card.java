@@ -25,7 +25,6 @@ public class Card {
                 return i;
             }
         }
-
         return -1;
     }
 
@@ -33,41 +32,49 @@ public class Card {
         return cards[i];
     }
 
-    public String getColor()
-    {
-        return cards[card].substring(0, 1);
+    public String getColor() {
+        String cardStr = cards[card];
+        if ((cardStr.startsWith("W") || cardStr.startsWith("P")) && cardStr.length() == 2) {
+            return cardStr.substring(1);
+        }
+        return cardStr.substring(0, 1);
     }
 
-    public int getValue()
-    {
+    public int getValue() {
         String cardStr = cards[card];
-        if (cardStr.equals("W") || cardStr.startsWith("W"))
-            return 13;  // Wild
-        if (cardStr.equals("P4"))
-            return 14;  // Wild Draw 4
+        if (cardStr.startsWith("W"))
+            return 13;
+        if (cardStr.startsWith("P"))
+            return 14;
         String suffix = cardStr.substring(1);
         switch (suffix) {
-            case "R": return 10;  // Reverse
-            case "S": return 11;  // Skip
-            case "P": return 12;  // Draw 2
-            default:  return Integer.parseInt(suffix);  // 0–9
+            case "R": return 10;
+            case "S": return 11;
+            case "P": return 12;
+            default:  return Integer.parseInt(suffix);
         }
     }
 
-    public boolean isActionCard()
-    {
+    public boolean isActionCard() {
         int v = getValue();
-        return v >= 10 && v <= 14; // Reverse, Skip, Draw 2, Wild, Wild Draw 4
+        return v >= 10 && v <= 14;
     }
 
-    public void setWildcardColor(String c, String color)
-    {
-        cards[findIndex(c)] = "W" + color;
+    public boolean isWild() {
+        String cardStr = cards[card];
+        return cardStr.equals("W") || cardStr.equals("P4");
     }
 
-    public void setPlusFourColor(String c, String color)
-    {
-        cards[findIndex(c)] = "P4" + color;
+    public boolean isPlusFour() {
+        return cards[card].equals("P4");
+    }
+
+    public void setColor(String color) {
+        if (cards[card].equals("W")) {
+            cards[card] = "W" + color;
+        } else if (cards[card].equals("P4")) {
+            cards[card] = "P" + color;
+        }
     }
 
     public String toString() {
@@ -82,29 +89,15 @@ public class Card {
             return "";
         }
         String cardStr = cards[card];
+        String color = getColor();
         String colorCode;
         
-        if (cardStr.equals("W") || cardStr.startsWith("W") || cardStr.equals("P4") || cardStr.startsWith("P4")) {
-            colorCode = ConsoleColors.WHITE;
-        } else {
-            String color = getColor();
-            switch (color) {
-                case "G":
-                    colorCode = ConsoleColors.GREEN;
-                    break;
-                case "R":
-                    colorCode = ConsoleColors.RED;
-                    break;
-                case "B":
-                    colorCode = ConsoleColors.BLUE;
-                    break;
-                case "Y":
-                    colorCode = ConsoleColors.YELLOW;
-                    break;
-                default:
-                    colorCode = ConsoleColors.WHITE;
-                    break;
-            }
+        switch (color) {
+            case "G": colorCode = ConsoleColors.GREEN; break;
+            case "R": colorCode = ConsoleColors.RED; break;
+            case "B": colorCode = ConsoleColors.BLUE; break;
+            case "Y": colorCode = ConsoleColors.YELLOW; break;
+            default:  colorCode = ConsoleColors.WHITE; break;
         }
         
         return JUno.colorize(cardStr, colorCode);

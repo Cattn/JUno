@@ -15,23 +15,44 @@ public class JUno {
 
         boolean numPlayersCorrect = false;
 
-        System.out.print("Enter number of players: ");
-        int numPlayers = input.nextInt();
-        input.nextLine();
+        int numPlayers;
 
+        try {
+            System.out.print("Enter number of players: ");
+            numPlayers = input.nextInt();
+        } catch (java.util.InputMismatchException e) {
+            System.out.println("Invalid input. Please enter a number.");
+            input.nextLine();
+            numPlayers = 0;
+        } catch (java.lang.NumberFormatException e) {
+            System.out.println("Invalid input. Please enter a number.");
+            input.nextLine();
+            numPlayers = 0;
+        }
+        input.nextLine();
         while (!numPlayersCorrect) {
             if (numPlayers < 2 || numPlayers > 10) {
                 clearScreen();
                 System.out.println("Invalid number of players. Please enter a number between 2 and 10.");
-                System.out.print("Enter number of players: ");
-                numPlayers = input.nextInt();
-                input.nextLine();
+                try {
+                    System.out.print("Enter number of players: ");
+                    numPlayers = input.nextInt();
+                    input.nextLine();
+                } catch (java.util.InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a number.");
+                    input.nextLine();
+                    numPlayers = 0;
+                } catch (java.lang.NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a number.");
+                    input.nextLine();
+                    numPlayers = 0;
+                }
             } else {
                 numPlayersCorrect = true;
                 break;
             }
         }
-        
+
         clearScreen();
 
         for (int i = 1; i <= numPlayers; i++) {
@@ -83,7 +104,7 @@ public class JUno {
                         Card card = player.getCards().get(move - 1);
                         if (game.isValidMove(card)) {
                             player.getCards().remove(card);
-                            game.setTopCard(card);
+                            game.checkActionCard(card, input);
                             game.nextPlayer();
                             turnComplete = true;
                         } else {
@@ -126,8 +147,7 @@ public class JUno {
         System.out.print("\033[H\033[2J");
     }
 
-    public static String colorize(String text, String colorCode)
-    {
+    public static String colorize(String text, String colorCode) {
         return colorCode + text + ConsoleColors.RESET;
     }
 }

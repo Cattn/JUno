@@ -1,6 +1,7 @@
 package juno;
 
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public class Game {
 
@@ -74,11 +75,10 @@ public class Game {
 
     public boolean isValidMove(Card card)
     {
-        String cardStr = card.toString();
-        if (cardStr.equals("W") || cardStr.startsWith("W") || cardStr.equals("P4") || cardStr.startsWith("P4")) {
+        if (card.isWild()) {
             return true;
         }
-        return card.getColor().equals(topCard.getColor()) || card.getValue() == topCard.getValue() || card.toString().equals(topCard.toString());
+        return card.getColor().equals(topCard.getColor()) || card.getValue() == topCard.getValue();
     }
 
     public void setTopCard(Card card)
@@ -99,6 +99,40 @@ public class Game {
     public void reverse()
     {
         this.reverseDirection();
+    }
+
+    public void checkActionCard(Card c, Scanner s)
+    {
+        String cardStr = c.toString();
+        if (c.isWild()) {
+            if (c.isPlusFour()) {
+                this.nextPlayer();
+                this.drawFourCards(this.players.get(this.currentPlayerIndex));
+                this.skipTurn();
+                System.out.println(this.players.get(this.currentPlayerIndex).getPlayerName() + " draws 4 cards!");
+            }
+            c.setColor(promptForColor(s));
+        } else if (cardStr.endsWith("R")) {
+            this.reverseDirection();
+        } else if (cardStr.endsWith("S")) {
+            this.skipTurn();
+        } else if (cardStr.endsWith("P")) {
+            this.nextPlayer();
+            this.drawTwoCards(this.players.get(this.currentPlayerIndex));
+        }
+        this.setTopCard(c);
+    }
+
+    private String promptForColor(Scanner s)
+    {
+        String color;
+        while (true) {
+            System.out.print("Choose a color (R, G, B, Y): ");
+            color = s.nextLine().trim().toUpperCase();
+            if (color.matches("[RGBY]")) break;
+            System.out.println("Invalid color.");
+        }
+        return color;
     }
 
     public boolean isGameOver()
