@@ -56,9 +56,9 @@ public class JUno {
                 clearScreen();
 
                 while (!turnComplete) {
-                    System.out.println("The top card is: " + game.getTopCard().toString());
+                    System.out.println("The top card is: " + game.getTopCard().toColoredString());
 
-                    System.out.println(player.getCards());
+                    System.out.println(player.getHand().toString());
 
                     System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size()
                             + ", 0 to draw a card): ");
@@ -124,5 +124,10 @@ public class JUno {
 
     public static void clearScreen() {
         System.out.print("\033[H\033[2J");
+    }
+
+    public static String colorize(String text, String colorCode)
+    {
+        return colorCode + text + ConsoleColors.RESET;
     }
 }

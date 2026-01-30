@@ -71,6 +71,42 @@ public class Card {
     }
 
     public String toString() {
+        if (card < 0 || card >= cards.length) {
+            return "";
+        }
         return cards[card];
+    }
+
+    public String toColoredString() {
+        if (card < 0 || card >= cards.length) {
+            return "";
+        }
+        String cardStr = cards[card];
+        String colorCode;
+        
+        if (cardStr.equals("W") || cardStr.startsWith("W") || cardStr.equals("P4") || cardStr.startsWith("P4")) {
+            colorCode = ConsoleColors.WHITE;
+        } else {
+            String color = getColor();
+            switch (color) {
+                case "G":
+                    colorCode = ConsoleColors.GREEN;
+                    break;
+                case "R":
+                    colorCode = ConsoleColors.RED;
+                    break;
+                case "B":
+                    colorCode = ConsoleColors.BLUE;
+                    break;
+                case "Y":
+                    colorCode = ConsoleColors.YELLOW;
+                    break;
+                default:
+                    colorCode = ConsoleColors.WHITE;
+                    break;
+            }
+        }
+        
+        return JUno.colorize(cardStr, colorCode);
     }
 }
