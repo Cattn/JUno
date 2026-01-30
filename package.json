@@ -1,0 +1,24 @@
+{
+  "name": "juno",
+  "version": "1.0.0",
+  "description": "Java based Uno recreation",
+  "main": "index.js",
+  "scripts": {
+    "dev": "nodemon --watch src --ext java --exec \"mvn compile exec:java -Dexec.mainClass=juno.JUno -q\""
+  },
+  "devDependencies": {
+    "nodemon": "^3.0.0"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Cattn/JUno.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/Cattn/JUno/issues"
+  },
+  "homepage": "https://github.com/Cattn/JUno#readme"
+}
