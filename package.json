@@ -2,7 +2,7 @@
   "name": "juno",
   "version": "1.0.0",
   "description": "Java based Uno recreation",
-  "main": "index.js",
+  "main": "src/main/java/juno/JUno.java",
   "scripts": {
     "dev": "nodemon --watch src --ext java --exec \"mvn compile exec:java -Dexec.mainClass=juno.JUno -q\""
   },
