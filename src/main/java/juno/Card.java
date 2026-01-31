@@ -2,6 +2,7 @@ package juno;
 
 public class Card {
     private int card;
+    private String chosenColor;
 
     public static String[] cards = { "G0", "R0", "B0", "Y0", "G1", "R1", "B1", "Y1", "G1", "R1", "B1", "Y1", "G2", "R2",
             "B2", "Y2", "G2", "R2", "B2", "Y2", "G3", "R3", "B3", "Y3", "G3", "R3", "B3", "Y3", "G4", "R4", "B4", "Y4",
@@ -13,10 +14,12 @@ public class Card {
 
     public Card() {
         card = (int) (Math.random() * cards.length);
+        chosenColor = null;
     }
 
     public Card(String c) {
         card = findIndex(c);
+        chosenColor = null;
     }
 
     public int findIndex(String c) {
@@ -34,8 +37,8 @@ public class Card {
 
     public String getColor() {
         String cardStr = cards[card];
-        if ((cardStr.startsWith("W") || cardStr.startsWith("P")) && cardStr.length() == 2) {
-            return cardStr.substring(1);
+        if (isWild() && chosenColor != null) {
+            return chosenColor;
         }
         return cardStr.substring(0, 1);
     }
@@ -70,11 +73,13 @@ public class Card {
     }
 
     public void setColor(String color) {
-        if (cards[card].equals("W")) {
-            cards[card] = "W" + color;
-        } else if (cards[card].equals("P4")) {
-            cards[card] = "P" + color;
+        if (isWild()) {
+            chosenColor = color;
         }
+    }
+
+    public void clearChosenColor() {
+        chosenColor = null;
     }
 
     public String toString() {
@@ -84,11 +89,24 @@ public class Card {
         return cards[card];
     }
 
+    public String toDisplayString() {
+        if (card < 0 || card >= cards.length) {
+            return "";
+        }
+        if (isWild() && chosenColor != null) {
+            if (isPlusFour()) {
+                return "P" + chosenColor;
+            }
+            return "W" + chosenColor;
+        }
+        return cards[card];
+    }
+
     public String toColoredString() {
         if (card < 0 || card >= cards.length) {
             return "";
         }
-        String cardStr = cards[card];
+        String cardStr = toDisplayString();
         String color = getColor();
         String colorCode;
         

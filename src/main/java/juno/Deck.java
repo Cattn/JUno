@@ -58,6 +58,9 @@ public class Deck
     
     public void add(Card c)
     {
+        if (c != null) {
+            c.clearChosenColor();
+        }
         deck.add(c);
     }
     
