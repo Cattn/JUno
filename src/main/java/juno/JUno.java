@@ -21,6 +21,7 @@ public class JUno {
             try {
                 System.out.print("Enter number of players: ");
                 numPlayers = input.nextInt();
+                input.nextLine();
             } catch (java.util.InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
                 input.nextLine();
@@ -46,7 +47,7 @@ public class JUno {
 
         for (int i = 1; i <= numPlayers; i++) {
             System.out.print("Enter name for Player " + i + ": ");
-            String name = input.next();
+            String name = input.nextLine();
             Player player = new Player(i);
             player.setPlayerName(name);
             players.add(player);
