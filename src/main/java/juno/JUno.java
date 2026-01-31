@@ -15,41 +15,30 @@ public class JUno {
 
         boolean numPlayersCorrect = false;
 
-        int numPlayers;
+        int numPlayers = 0;
 
-        try {
-            System.out.print("Enter number of players: ");
-            numPlayers = input.nextInt();
-        } catch (java.util.InputMismatchException e) {
-            System.out.println("Invalid input. Please enter a number.");
-            input.nextLine();
-            numPlayers = 0;
-        } catch (java.lang.NumberFormatException e) {
-            System.out.println("Invalid input. Please enter a number.");
-            input.nextLine();
-            numPlayers = 0;
-        }
-        input.nextLine();
         while (!numPlayersCorrect) {
-            if (numPlayers < 2 || numPlayers > 10) {
-                clearScreen();
-                System.out.println("Invalid number of players. Please enter a number between 2 and 10.");
-                try {
-                    System.out.print("Enter number of players: ");
-                    numPlayers = input.nextInt();
-                    input.nextLine();
-                } catch (java.util.InputMismatchException e) {
-                    System.out.println("Invalid input. Please enter a number.");
-                    input.nextLine();
-                    numPlayers = 0;
-                } catch (java.lang.NumberFormatException e) {
-                    System.out.println("Invalid input. Please enter a number.");
-                    input.nextLine();
-                    numPlayers = 0;
-                }
-            } else {
+            try {
+                System.out.print("Enter number of players: ");
+                numPlayers = input.nextInt();
+            } catch (java.util.InputMismatchException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                input.nextLine();
+                numPlayers = 0;
+            } catch (java.lang.NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
+                input.nextLine();
+                numPlayers = 0;
+            }
+
+            if (numPlayers >= 2 && numPlayers <= 10) {
                 numPlayersCorrect = true;
-                break;
+            } else {
+                System.out.println("Invalid number of players. Please enter a number between 2 and 10.");
+                input.nextLine();
+                numPlayers = 0;
+                numPlayersCorrect = false;
+                continue;
             }
         }
 
