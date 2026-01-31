@@ -26,11 +26,9 @@ public class JUno {
                 input.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
-                input.nextLine();
                 numPlayers = 0;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number.");
-                input.nextLine();
                 numPlayers = 0;
             }
 
@@ -38,10 +36,8 @@ public class JUno {
                 numPlayersCorrect = true;
             } else {
                 System.out.println("Invalid number of players. Please enter a number between 2 and 10.");
-                input.nextLine();
                 numPlayers = 0;
                 numPlayersCorrect = false;
-                continue;
             }
         }
 
