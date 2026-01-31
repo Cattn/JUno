@@ -106,6 +106,7 @@ public class Game {
     public void reverseDirection()
     {
         this.isReversed = !this.isReversed;
+        this.currentPlayerIndex = (this.currentPlayerIndex - 1) % this.players.size();
     }
 
     public void skipTurn()
@@ -121,7 +122,6 @@ public class Game {
     public void checkActionCard(Card c, Scanner s)
     {
         String cardStr = c.toString();
-        Player currentPlayer = this.players.get(this.currentPlayerIndex);
         if (c.isWild()) {
             if (c.isPlusFour()) {
                 this.nextPlayer();
@@ -131,7 +131,6 @@ public class Game {
             c.setColor(promptForColor(s));
         } else if (cardStr.endsWith("R")) {
             this.reverseDirection();
-            System.out.println(currentPlayer.getPlayerName() + " reverses the direction of the game!");
         } else if (cardStr.endsWith("S")) {
             this.skipTurn();
         } else if (cardStr.endsWith("P")) {
