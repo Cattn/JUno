@@ -73,6 +73,23 @@ public class Game {
         }
     }
 
+    public int getCurrentPlayerIndex()
+    {
+        return this.currentPlayerIndex;
+    }
+
+    public void normalizeCurrentPlayerIndex()
+    {
+        if (this.players.isEmpty()) {
+            return;
+        }
+        if (this.currentPlayerIndex >= this.players.size()) {
+            this.currentPlayerIndex = 0;
+        } else if (this.currentPlayerIndex < 0) {
+            this.currentPlayerIndex = this.players.size() - 1;
+        }
+    }
+
     public boolean isValidMove(Card card)
     {
         if (card.isWild()) {
@@ -104,6 +121,7 @@ public class Game {
     public void checkActionCard(Card c, Scanner s)
     {
         String cardStr = c.toString();
+        Player currentPlayer = this.players.get(this.currentPlayerIndex);
         if (c.isWild()) {
             if (c.isPlusFour()) {
                 this.nextPlayer();
@@ -113,8 +131,7 @@ public class Game {
             c.setColor(promptForColor(s));
         } else if (cardStr.endsWith("R")) {
             this.reverseDirection();
-            this.nextPlayer();
-            System.out.println(this.players.get(this.currentPlayerIndex).getPlayerName() + " reverses the direction of the game!");
+            System.out.println(currentPlayer.getPlayerName() + " reverses the direction of the game!");
         } else if (cardStr.endsWith("S")) {
             this.skipTurn();
         } else if (cardStr.endsWith("P")) {

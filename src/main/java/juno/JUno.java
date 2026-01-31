@@ -59,77 +59,78 @@ public class JUno {
         game.startGame(players);
 
         while (!game.isGameOver()) {
-            for (int i = 0; i < game.getPlayers().size(); i++) {
-                Player player = game.getPlayers().get(i);
-                boolean turnComplete = false;
+            Player player = game.getPlayers().get(game.getCurrentPlayerIndex());
+            boolean turnComplete = false;
 
-                clearScreen();
-                System.out.print("It is " + player.getPlayerName() + "'s turn. Press Enter when ready. ");
-                input.nextLine();
-                clearScreen();
+            clearScreen();
+            System.out.print("It is " + player.getPlayerName() + "'s turn. Press Enter when ready. ");
+            input.nextLine();
+            clearScreen();
 
-                while (!turnComplete) {
-                    System.out.println("The top card is: " + game.getTopCard().toColoredString());
+            while (!turnComplete) {
+                System.out.println("The top card is: " + game.getTopCard().toColoredString());
 
-                    System.out.println(player.getHand().toString());
+                System.out.println(player.getHand().toString());
 
-                    if (player.getCards().size() > 1) {
-                        System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size()
-                            + ", 0 to draw a card): ");
-                    } else {
-                        System.out.print(player.getPlayerName() + ", enter your move (1 to play your last card, 0 to draw a card): ");
-                    }
+                if (player.getCards().size() > 1) {
+                    System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size()
+                        + ", 0 to draw a card): ");
+                } else {
+                    System.out.print(player.getPlayerName() + ", enter your move (1 to play your last card, 0 to draw a card): ");
+                }
 
-                    int move;
-                    try {
-                        move = input.nextInt();
-                        input.nextLine();
-                    } catch (InputMismatchException e) {
-                        System.out.println("Invalid input. Please enter a number.");
-                        input.nextLine();
-                        continue;
-                    } catch (NumberFormatException e) {
-                        System.out.println("Invalid input. Please enter a number.");
-                        input.nextLine();
-                        continue;
-                    }
+                int move;
+                try {
+                    move = input.nextInt();
+                    input.nextLine();
+                } catch (InputMismatchException e) {
+                    System.out.println("Invalid input. Please enter a number.");
+                    input.nextLine();
+                    continue;
+                } catch (NumberFormatException e) {
+                    System.out.println("Invalid input. Please enter a number.");
+                    input.nextLine();
+                    continue;
+                }
 
-                    if (move == 0) {
-                        game.drawCard(player);
+                if (move == 0) {
+                    game.drawCard(player);
+                    turnComplete = true;
+                } else if (move > 0 && move <= player.getCards().size()) {
+                    Card card = player.getCards().get(move - 1);
+                    if (game.isValidMove(card)) {
+                        player.getCards().remove(card);
+                        game.checkActionCard(card, input);
                         turnComplete = true;
-                    } else if (move > 0 && move <= player.getCards().size()) {
-                        Card card = player.getCards().get(move - 1);
-                        if (game.isValidMove(card)) {
-                            player.getCards().remove(card);
-                            game.checkActionCard(card, input);
-                            turnComplete = true;
-                        } else {
-                            System.out.println("Invalid move. Please try again.");
-                        }
                     } else {
                         System.out.println("Invalid move. Please try again.");
                     }
+                } else {
+                    System.out.println("Invalid move. Please try again.");
                 }
+            }
 
-                if (player.hasWon()) {
-                    System.out.println(player.getPlayerName() + " has won!");
+            if (player.hasWon()) {
+                System.out.println(player.getPlayerName() + " has won!");
 
-                    game.getPlayers().remove(player);
-                    i--;
+                game.getPlayers().remove(player);
 
-                    if (game.getPlayers().size() > 1) {
-                        System.out.print("Continue with remaining players? (y/n): ");
-                        String continueInput = input.nextLine().trim().toLowerCase();
-                        if (!continueInput.equals("y") && !continueInput.equals("yes")) {
-                            game.endGame();
-                            break;
-                        }
-                    } else {
-                        System.out.println("No players left. Game over.");
+                if (game.getPlayers().size() > 1) {
+                    System.out.print("Continue with remaining players? (y/n): ");
+                    String continueInput = input.nextLine().trim().toLowerCase();
+                    if (!continueInput.equals("y") && !continueInput.equals("yes")) {
                         game.endGame();
                         break;
                     }
+                } else {
+                    System.out.println("No players left. Game over.");
+                    game.endGame();
+                    break;
                 }
+
+                game.normalizeCurrentPlayerIndex();
+            } else {
+                game.nextPlayer();
             }
         }
 
