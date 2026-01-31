@@ -108,17 +108,19 @@ public class Game {
             if (c.isPlusFour()) {
                 this.nextPlayer();
                 this.drawFourCards(this.players.get(this.currentPlayerIndex));
-                this.skipTurn();
-                System.out.println(this.players.get(this.currentPlayerIndex).getPlayerName() + " draws 4 cards!");
+                System.out.println(this.players.get(this.currentPlayerIndex).getPlayerName() + " draws 4 cards and skips their turn!");
             }
             c.setColor(promptForColor(s));
         } else if (cardStr.endsWith("R")) {
             this.reverseDirection();
+            this.nextPlayer();
+            System.out.println(this.players.get(this.currentPlayerIndex).getPlayerName() + " reverses the direction of the game!");
         } else if (cardStr.endsWith("S")) {
             this.skipTurn();
         } else if (cardStr.endsWith("P")) {
             this.nextPlayer();
             this.drawTwoCards(this.players.get(this.currentPlayerIndex));
+            System.out.println(this.players.get(this.currentPlayerIndex).getPlayerName() + " draws 2 cards and skips their turn!");
         }
         this.setTopCard(c);
     }
