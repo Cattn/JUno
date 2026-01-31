@@ -2,6 +2,8 @@ package juno;
 
 import java.util.ArrayList;
 import java.util.Scanner;
+import java.util.InputMismatchException;
+import java.lang.NumberFormatException;
 
 public class JUno {
     public static ArrayList<Player> players = new ArrayList<Player>();
@@ -22,11 +24,11 @@ public class JUno {
                 System.out.print("Enter number of players: ");
                 numPlayers = input.nextInt();
                 input.nextLine();
-            } catch (java.util.InputMismatchException e) {
+            } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
                 input.nextLine();
                 numPlayers = 0;
-            } catch (java.lang.NumberFormatException e) {
+            } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number.");
                 input.nextLine();
                 numPlayers = 0;
@@ -77,11 +79,11 @@ public class JUno {
                     try {
                         move = input.nextInt();
                         input.nextLine();
-                    } catch (java.util.InputMismatchException e) {
+                    } catch (InputMismatchException e) {
                         System.out.println("Invalid input. Please enter a number.");
                         input.nextLine();
                         continue;
-                    } catch (java.lang.NumberFormatException e) {
+                    } catch (NumberFormatException e) {
                         System.out.println("Invalid input. Please enter a number.");
                         input.nextLine();
                         continue;
