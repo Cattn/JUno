@@ -79,7 +79,7 @@ public class JUno {
                     } else {
                         System.out.print(player.getPlayerName() + ", enter your move (1 to play your last card, 0 to draw a card): ");
                     }
-                    
+
                     int move;
                     try {
                         move = input.nextInt();
@@ -102,7 +102,7 @@ public class JUno {
                         if (game.isValidMove(card)) {
                             player.getCards().remove(card);
                             game.checkActionCard(card, input);
-                            game.nextPlayer();
+                            //game.nextPlayer();
                             turnComplete = true;
                         } else {
                             System.out.println("Invalid move. Please try again.");
@@ -115,28 +115,25 @@ public class JUno {
                 if (player.hasWon()) {
                     System.out.println(player.getPlayerName() + " has won!");
 
-                    if (game.getPlayers().size() <= 1) {
-                        game.endGame();
-                        break;
-                    }
-
-                    System.out.print("Continue with remaining players? (y/n): ");
-                    String continueInput = input.nextLine().trim().toLowerCase();
-                    if (!continueInput.equals("y") && !continueInput.equals("yes")) {
-                        game.endGame();
-                        break;
-                    }
-
-                    game.getPlayers().remove(i);
+                    game.getPlayers().remove(player);
                     i--;
 
-                    if (game.getPlayers().size() <= 1) {
+                    if (game.getPlayers().size() > 1) {
+                        System.out.print("Continue with remaining players? (y/n): ");
+                        String continueInput = input.nextLine().trim().toLowerCase();
+                        if (!continueInput.equals("y") && !continueInput.equals("yes")) {
+                            game.endGame();
+                            break;
+                        }
+                    } else {
+                        System.out.println("No players left. Game over.");
                         game.endGame();
                         break;
                     }
                 }
             }
         }
+
         input.close();
     }
 
