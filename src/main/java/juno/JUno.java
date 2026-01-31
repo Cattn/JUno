@@ -102,7 +102,6 @@ public class JUno {
                         if (game.isValidMove(card)) {
                             player.getCards().remove(card);
                             game.checkActionCard(card, input);
-                            //game.nextPlayer();
                             turnComplete = true;
                         } else {
                             System.out.println("Invalid move. Please try again.");
