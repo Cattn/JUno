@@ -103,7 +103,7 @@ public class Game {
         this.topCard = card;
     }
 
-    public void reverseDirection()
+    public void reverse()
     {
         this.isReversed = !this.isReversed;
         this.currentPlayerIndex = (this.currentPlayerIndex - 1) % this.players.size();
@@ -112,11 +112,6 @@ public class Game {
     public void skipTurn()
     {
         this.nextPlayer();
-    }
-
-    public void reverse()
-    {
-        this.reverseDirection();
     }
 
     public void checkActionCard(Card c, Scanner s)
@@ -130,7 +125,7 @@ public class Game {
             }
             c.setColor(promptForColor(s));
         } else if (cardStr.endsWith("R")) {
-            this.reverseDirection();
+            this.reverse();
         } else if (cardStr.endsWith("S")) {
             this.skipTurn();
         } else if (cardStr.endsWith("P")) {
