@@ -135,7 +135,17 @@ public class JUno {
     }
 
     public static void clearScreen() {
-        System.out.print("\033[H\033[2J");
+        String osName = System.getProperty("os.name").toLowerCase();
+        try {
+            if (osName.contains("win")) {
+                new ProcessBuilder("cmd", "/c", "cls").inheritIO().start().waitFor();
+            } else {
+                System.out.print("\033[H\033[2J");
+                System.out.flush();
+            }
+        } catch (Exception e) {
+            System.out.print("\n".repeat(50));
+        }
     }
 
     public static String colorize(String text, String colorCode) {
