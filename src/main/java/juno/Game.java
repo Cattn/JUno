@@ -8,19 +8,17 @@ public class Game {
     private ArrayList<Player> players;
     private Integer currentPlayerIndex;
     private boolean isReversed;
-    private Card topCard;   
+    private Card topCard;
     private boolean isOver;
 
-    public Game(ArrayList<Player> players)
-    {
+    public Game(ArrayList<Player> players) {
         this.players = players;
         this.currentPlayerIndex = 0;
         this.isReversed = false;
         this.isOver = false;
     }
 
-    public void startGame(ArrayList<Player> players)
-    {
+    public void startGame(ArrayList<Player> players) {
         this.players = players;
         this.isOver = false;
         for (Player player : players) {
@@ -39,28 +37,24 @@ public class Game {
             }
         } while (true);
     }
-    
-    public void drawCard(Player player)
-    {
+
+    public void drawCard(Player player) {
         player.getCards().add(JUno.deck.draw());
     }
 
-    public void drawTwoCards(Player player)
-    {
+    public void drawTwoCards(Player player) {
         player.getCards().add(JUno.deck.draw());
         player.getCards().add(JUno.deck.draw());
     }
 
-    public void drawFourCards(Player player)
-    {
+    public void drawFourCards(Player player) {
         player.getCards().add(JUno.deck.draw());
         player.getCards().add(JUno.deck.draw());
         player.getCards().add(JUno.deck.draw());
         player.getCards().add(JUno.deck.draw());
     }
 
-    public void nextPlayer()
-    {
+    public void nextPlayer() {
         if (this.isReversed) {
             this.currentPlayerIndex--;
         } else {
@@ -73,13 +67,11 @@ public class Game {
         }
     }
 
-    public int getCurrentPlayerIndex()
-    {
+    public int getCurrentPlayerIndex() {
         return this.currentPlayerIndex;
     }
 
-    public void normalizeCurrentPlayerIndex()
-    {
+    public void normalizeCurrentPlayerIndex() {
         if (this.players.isEmpty()) {
             return;
         }
@@ -90,38 +82,34 @@ public class Game {
         }
     }
 
-    public boolean isValidMove(Card card)
-    {
+    public boolean isValidMove(Card card) {
         if (card.isWild()) {
             return true;
         }
         return card.getColor().equals(topCard.getColor()) || card.getValue() == topCard.getValue();
     }
 
-    public void setTopCard(Card card)
-    {
+    public void setTopCard(Card card) {
         this.topCard = card;
     }
 
-    public void reverse()
-    {
+    public void reverse() {
         this.isReversed = !this.isReversed;
         this.currentPlayerIndex = (this.currentPlayerIndex - 1) % this.players.size();
     }
 
-    public void skipTurn()
-    {
+    public void skipTurn() {
         this.nextPlayer();
     }
 
-    public void checkActionCard(Card c, Scanner s)
-    {
+    public void checkActionCard(Card c, Scanner s) {
         String cardStr = c.toString();
         if (c.isWild()) {
             if (c.isPlusFour()) {
                 this.nextPlayer();
                 this.drawFourCards(this.players.get(this.currentPlayerIndex));
-                System.out.println(this.players.get(this.currentPlayerIndex).getPlayerName() + " draws 4 cards and skips their turn!");
+                System.out.println(this.players.get(this.currentPlayerIndex).getPlayerName()
+                        + " draws 4 cards and skips their turn!");
             }
             c.setColor(promptForColor(s));
         } else if (cardStr.endsWith("R")) {
@@ -131,40 +119,37 @@ public class Game {
         } else if (cardStr.endsWith("P")) {
             this.nextPlayer();
             this.drawTwoCards(this.players.get(this.currentPlayerIndex));
-            System.out.println(this.players.get(this.currentPlayerIndex).getPlayerName() + " draws 2 cards and skips their turn!");
+            System.out.println(
+                    this.players.get(this.currentPlayerIndex).getPlayerName() + " draws 2 cards and skips their turn!");
         }
         this.setTopCard(c);
     }
 
-    private String promptForColor(Scanner s)
-    {
+    private String promptForColor(Scanner s) {
         String color;
         while (true) {
             System.out.print("Choose a color (R, G, B, Y): ");
             color = s.nextLine().trim().toUpperCase();
-            if (color.matches("[RGBY]")) break;
+            if (color.matches("[RGBY]"))
+                break;
             System.out.println("Invalid color.");
         }
         return color;
     }
 
-    public boolean isGameOver()
-    {
+    public boolean isGameOver() {
         return isOver || players.size() <= 1;
     }
 
-    public void endGame()
-    {
+    public void endGame() {
         this.isOver = true;
     }
 
-    public ArrayList<Player> getPlayers()
-    {
+    public ArrayList<Player> getPlayers() {
         return players;
     }
 
-    public Card getTopCard()
-    {
+    public Card getTopCard() {
         return topCard;
     }
 }

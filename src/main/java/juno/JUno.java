@@ -70,9 +70,10 @@ public class JUno {
 
                 if (player.getCards().size() > 1) {
                     System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size()
-                        + ", 0 to draw a card): ");
+                            + ", 0 to draw a card): ");
                 } else {
-                    System.out.print(player.getPlayerName() + ", enter your move (1 to play your last card, 0 to draw a card): ");
+                    System.out.print(player.getPlayerName()
+                            + ", enter your move (1 to play your last card, 0 to draw a card): ");
                 }
 
                 int move;

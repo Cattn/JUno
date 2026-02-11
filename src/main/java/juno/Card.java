@@ -5,7 +5,12 @@ public class Card {
     private String chosenColor;
 
     public static String[] cards = {
-        "G0", "R0", "B0", "Y0", "G1", "R1", "B1", "Y1", "G1", "R1", "B1", "Y1", "G2", "R2", "B2", "Y2", "G2", "R2", "B2", "Y2", "G3", "R3", "B3", "Y3", "G3", "R3", "B3", "Y3", "G4", "R4", "B4", "Y4", "G4", "R4", "B4", "Y4", "G5", "R5", "B5", "Y5", "G5", "R5", "B5", "Y5", "G6", "R6", "B6", "Y6", "G6", "R6", "B6", "Y6", "G7", "R7", "B7", "Y7", "G7", "R7", "B7", "Y7", "G8", "R8", "B8", "Y8", "G8", "R8", "B8", "Y8", "G9", "R9", "B9", "Y9", "G9", "R9", "B9", "Y9", "W", "W", "W", "W", "GR", "RR", "BR", "YR", "GR", "RR", "BR", "YR", "GS", "RS", "BS", "YS", "GS", "RS", "BS", "YS", "P4", "P4", "P4", "P4", "GP", "RP", "BP", "YP", "GP", "RP", "BP", "YP",
+            "G0", "R0", "B0", "Y0", "G1", "R1", "B1", "Y1", "G1", "R1", "B1", "Y1", "G2", "R2", "B2", "Y2", "G2", "R2",
+            "B2", "Y2", "G3", "R3", "B3", "Y3", "G3", "R3", "B3", "Y3", "G4", "R4", "B4", "Y4", "G4", "R4", "B4", "Y4",
+            "G5", "R5", "B5", "Y5", "G5", "R5", "B5", "Y5", "G6", "R6", "B6", "Y6", "G6", "R6", "B6", "Y6", "G7", "R7",
+            "B7", "Y7", "G7", "R7", "B7", "Y7", "G8", "R8", "B8", "Y8", "G8", "R8", "B8", "Y8", "G9", "R9", "B9", "Y9",
+            "G9", "R9", "B9", "Y9", "W", "W", "W", "W", "GR", "RR", "BR", "YR", "GR", "RR", "BR", "YR", "GS", "RS",
+            "BS", "YS", "GS", "RS", "BS", "YS", "P4", "P4", "P4", "P4", "GP", "RP", "BP", "YP", "GP", "RP", "BP", "YP",
     };
 
     public Card() {
@@ -47,10 +52,14 @@ public class Card {
             return 14;
         String suffix = cardStr.substring(1);
         switch (suffix) {
-            case "R": return 10;
-            case "S": return 11;
-            case "P": return 12;
-            default:  return Integer.parseInt(suffix);
+            case "R":
+                return 10;
+            case "S":
+                return 11;
+            case "P":
+                return 12;
+            default:
+                return Integer.parseInt(suffix);
         }
     }
 
@@ -105,15 +114,25 @@ public class Card {
         String cardStr = toDisplayString();
         String color = getColor();
         String colorCode;
-        
+
         switch (color) {
-            case "G": colorCode = ConsoleColors.GREEN; break;
-            case "R": colorCode = ConsoleColors.RED; break;
-            case "B": colorCode = ConsoleColors.BLUE; break;
-            case "Y": colorCode = ConsoleColors.YELLOW; break;
-            default:  colorCode = ConsoleColors.WHITE; break;
+            case "G":
+                colorCode = ConsoleColors.GREEN;
+                break;
+            case "R":
+                colorCode = ConsoleColors.RED;
+                break;
+            case "B":
+                colorCode = ConsoleColors.BLUE;
+                break;
+            case "Y":
+                colorCode = ConsoleColors.YELLOW;
+                break;
+            default:
+                colorCode = ConsoleColors.WHITE;
+                break;
         }
-        
+
         return JUno.colorize(cardStr, colorCode);
     }
 }
