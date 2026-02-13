@@ -38,10 +38,6 @@ public class Deck {
         return deck;
     }
 
-    public void shuffle() {
-        Collections.shuffle(deck);
-    }
-
     public void add(Card c) {
         if (c != null) {
             c.clearChosenColor();
