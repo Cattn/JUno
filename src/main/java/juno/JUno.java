@@ -67,6 +67,11 @@ public class JUno {
             clearScreen();
 
             while (!turnComplete) {
+                while (!hasPlayableCard(game, player)) {
+                    System.out.println("No playable cards. Drawing a card...");
+                    game.drawCard(player);
+                }
+
                 System.out.println("The top card is: " + game.getTopCard().toColoredString());
 
                 System.out.println(player.getHand().toString());
@@ -170,5 +175,14 @@ public class JUno {
 
     public static String colorize(String text, String colorCode) {
         return colorCode + text + ConsoleColors.RESET;
+    }
+
+    private static boolean hasPlayableCard(Game game, Player player) {
+        for (Card card : player.getCards()) {
+            if (game.isValidMove(card)) {
+                return true;
+            }
+        }
+        return false;
     }
 }
