@@ -26,10 +26,12 @@ public class JUno {
                 input.nextLine();
             } catch (InputMismatchException e) {
                 System.out.println("Invalid input. Please enter a number.");
-                numPlayers = 0;
+                input.nextLine();
+                continue;
             } catch (NumberFormatException e) {
                 System.out.println("Invalid input. Please enter a number.");
-                numPlayers = 0;
+                input.nextLine();
+                continue;
             }
 
             if (numPlayers >= 2 && numPlayers <= 10) {
