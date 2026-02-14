@@ -24,7 +24,7 @@ public class Deck {
         } else {
             for (int i = 0; i < Card.cards.length; i++) {
                 if (!Card.cards[i].equals(game.getTopCard().toString())) {
-                    deck.add(new Card(Card.cards[i]));
+                    this.add(new Card(Card.cards[i]));
                     break;
                 }
             }
