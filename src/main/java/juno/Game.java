@@ -99,7 +99,10 @@ public class Game {
 
     public void reverse() {
         this.isReversed = !this.isReversed;
-        this.currentPlayerIndex = (this.currentPlayerIndex - 1) % this.players.size();
+        if (this.players.size() == 2) {
+            // Reverse acts like skip in 2-player games.
+            this.nextPlayer();
+        }
     }
 
     public void skipTurn() {
