@@ -20,26 +20,23 @@ public class JUno {
         int numPlayers = 0;
 
         while (!numPlayersCorrect) {
-            try {
-                System.out.print("Enter number of players: ");
-                numPlayers = input.nextInt();
-                input.nextLine();
-            } catch (InputMismatchException e) {
+            System.out.print("Enter number of players: ");
+            String playerInput = input.nextLine().trim();
+            
+            if (playerInput.isEmpty()) {
                 System.out.println("Invalid input. Please enter a number.");
-                input.nextLine();
-                continue;
-            } catch (NumberFormatException e) {
-                System.out.println("Invalid input. Please enter a number.");
-                input.nextLine();
                 continue;
             }
-
-            if (numPlayers >= 2 && numPlayers <= 10) {
-                numPlayersCorrect = true;
-            } else {
-                System.out.println("Invalid number of players. Please enter a number between 2 and 10.");
-                numPlayers = 0;
-                numPlayersCorrect = false;
+            
+            try {
+                numPlayers = Integer.parseInt(playerInput);
+                if (numPlayers >= 2 && numPlayers <= 10) {
+                    numPlayersCorrect = true;
+                } else {
+                    System.out.println("Invalid number of players. Please enter a number between 2 and 10.");
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid input. Please enter a number.");
             }
         }
 
