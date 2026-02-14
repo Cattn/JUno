@@ -32,10 +32,6 @@ public class Card {
         return -1;
     }
 
-    public String getCard(int i) {
-        return cards[i];
-    }
-
     public String getColor() {
         String cardStr = cards[card];
         if (isWild() && chosenColor != null) {

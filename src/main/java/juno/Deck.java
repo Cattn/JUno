@@ -5,10 +5,14 @@ import java.util.Collections;
 
 public class Deck {
     private ArrayList<Card> deck = new ArrayList<Card>();
+    private Game game;
 
-    public Deck() {
-        for (int j = 0; j < Card.cards.length; j++) {
-            deck.add(new Card(Card.cards[j]));
+    public Deck(Game game) {
+        this.game = game;
+        for(int i = 0; i < 3; i++) {
+            for (int j = 0; j < Card.cards.length; j++) {
+                deck.add(new Card(Card.cards[j]));
+            }
         }
 
         Collections.shuffle(deck);
@@ -18,7 +22,13 @@ public class Deck {
         if (!deck.isEmpty()) {
             return deck.remove(0);
         } else {
-            return null;
+            for (int i = 0; i < Card.cards.length; i++) {
+                if (!Card.cards[i].equals(game.getTopCard().toString())) {
+                    deck.add(new Card(Card.cards[i]));
+                    break;
+                }
+            }
+            return deck.remove(0);
         }
     }
 
@@ -34,46 +44,10 @@ public class Deck {
         }
     }
 
-    public ArrayList<Card> getDeck() {
-        return deck;
-    }
-
     public void add(Card c) {
         if (c != null) {
             c.clearChosenColor();
         }
         deck.add(c);
-    }
-
-    public void remove(Card c) {
-        deck.remove(find(c.toString()));
-    }
-
-    public Card find(String card) {
-        for (Card c : deck) {
-            if (c.toString().equals(card)) {
-                return c;
-            }
-        }
-
-        return null;
-    }
-
-    public int size() {
-        return deck.size();
-    }
-
-    public static int findIndex(String[] arr, String text) {
-        int len = arr.length;
-        int i = 0;
-
-        while (i < len) {
-            if (arr[i].equals(text)) {
-                return i;
-            } else {
-                i += 1;
-            }
-        }
-        return -1;
     }
 }
