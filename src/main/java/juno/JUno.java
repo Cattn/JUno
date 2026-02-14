@@ -48,6 +48,9 @@ public class JUno {
         for (int i = 1; i <= numPlayers; i++) {
             System.out.print("Enter name for Player " + i + ": ");
             String name = input.nextLine();
+            if(name.trim().isEmpty()) {
+                name = "Player " + i;
+            }
             Player player = new Player(i);
             player.setPlayerName(name);
             players.add(player);
@@ -79,10 +82,9 @@ public class JUno {
                             + ", enter your move (1 to play your last card, 0 to draw a card): ");
                 }
 
-                int move;
+                String move;
                 try {
-                    move = input.nextInt();
-                    input.nextLine();
+                    move = input.nextLine();
                 } catch (InputMismatchException e) {
                     System.out.println("Invalid input. Please enter a number.");
                     input.nextLine();
@@ -93,20 +95,38 @@ public class JUno {
                     continue;
                 }
 
-                if (move == 0) {
+                if (move.equals("0")) {
                     game.drawCard(player);
                     turnComplete = true;
-                } else if (move > 0 && move <= player.getCards().size()) {
-                    Card card = player.getCards().get(move - 1);
-                    if (game.isValidMove(card)) {
-                        player.getCards().remove(card);
-                        game.checkActionCard(card, input);
-                        turnComplete = true;
-                    } else {
-                        System.out.println("Invalid move. Please try again.");
-                    }
                 } else {
-                    System.out.println("Invalid move. Please try again.");
+                    Card card = player.getHand().find(move.trim().toUpperCase());
+                    if (card != null) {
+                        if (game.isValidMove(card)) {
+                            player.getHand().remove(card);
+                            game.checkActionCard(card, input);
+                            turnComplete = true;
+                        } else {
+                            System.out.println("Invalid move. Please try again.");
+                        }
+                    } else {
+                        try {
+                            int idx = Integer.parseInt(move);
+                            if (idx > 0 && idx <= player.getCards().size()) {
+                                Card cardByIdx = player.getCards().get(idx - 1);
+                                if (game.isValidMove(cardByIdx)) {
+                                    player.getHand().remove(cardByIdx);
+                                    game.checkActionCard(cardByIdx, input);
+                                    turnComplete = true;
+                                } else {
+                                    System.out.println("Invalid move. Please try again.");
+                                }
+                            } else {
+                                System.out.println("Invalid move. Please try again.");
+                            }
+                        } catch (NumberFormatException e) {
+                            System.out.println("Invalid move. Please try again.");
+                        }
+                    }
                 }
             }
 
