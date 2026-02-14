@@ -77,8 +77,10 @@ public class JUno {
                     System.out.println("Drew a playable card: " + lastDrawn.toColoredString());
                     player.getHand().remove(lastDrawn);
                     game.checkActionCard(lastDrawn, input);
-                    System.out.print("Press Enter to continue...");
-                    input.nextLine();
+                    if (!lastDrawn.isWild() && !lastDrawn.isPlusFour()) {
+                        System.out.print("Press Enter to continue...");
+                        input.nextLine();
+                    }
                     turnComplete = true;
                     continue;
                 }
