@@ -38,20 +38,24 @@ public class Game {
         } while (true);
     }
 
-    public void drawCard(Player player) {
-        player.getCards().add(JUno.deck.draw());
+    public Card drawCard(Player player) {
+        Card drawn = JUno.deck.draw();
+        if (drawn != null) {
+            player.getCards().add(drawn);
+        }
+        return drawn;
     }
 
     public void drawTwoCards(Player player) {
-        player.getCards().add(JUno.deck.draw());
-        player.getCards().add(JUno.deck.draw());
+        drawCard(player);
+        drawCard(player);
     }
 
     public void drawFourCards(Player player) {
-        player.getCards().add(JUno.deck.draw());
-        player.getCards().add(JUno.deck.draw());
-        player.getCards().add(JUno.deck.draw());
-        player.getCards().add(JUno.deck.draw());
+        drawCard(player);
+        drawCard(player);
+        drawCard(player);
+        drawCard(player);
     }
 
     public void nextPlayer() {

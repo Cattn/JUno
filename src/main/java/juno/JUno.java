@@ -67,9 +67,20 @@ public class JUno {
             clearScreen();
 
             while (!turnComplete) {
-                while (!hasPlayableCard(game, player)) {
-                    System.out.println("No playable cards. Drawing a card...");
-                    game.drawCard(player);
+                if (!hasPlayableCard(game, player)) {
+                    Card lastDrawn = null;
+                    while (lastDrawn == null || !game.isValidMove(lastDrawn)) {
+                        System.out.println("No playable cards. Drawing a card...");
+                        lastDrawn = game.drawCard(player);
+                    }
+
+                    System.out.println("Drew a playable card: " + lastDrawn.toColoredString());
+                    player.getHand().remove(lastDrawn);
+                    game.checkActionCard(lastDrawn, input);
+                    System.out.print("Press Enter to continue...");
+                    input.nextLine();
+                    turnComplete = true;
+                    continue;
                 }
 
                 System.out.println("The top card is: " + game.getTopCard().toColoredString());
