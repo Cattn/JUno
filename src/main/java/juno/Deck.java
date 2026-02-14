@@ -28,6 +28,9 @@ public class Deck {
                     break;
                 }
             }
+            if (deck.isEmpty()) {
+                return null;
+            }
             return deck.remove(0);
         }
     }
