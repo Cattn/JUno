@@ -21,7 +21,7 @@ public class Hand {
 	}
 
 	public void remove(Card c) {
-		playerCards.remove(find(c.toString()));
+		playerCards.remove(c);
 	}
 
 	public Card find(String card) {
