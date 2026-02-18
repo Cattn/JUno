@@ -14,12 +14,6 @@ public class Hand {
 		playerCards.add(c);
 	}
 
-	public void add(ArrayList<Card> listOfCards) {
-		for (Card c : listOfCards) {
-			playerCards.add(c);
-		}
-	}
-
 	public void remove(Card c) {
 		playerCards.remove(c);
 	}
@@ -38,10 +32,6 @@ public class Hand {
 		return playerCards.size();
 	}
 
-	public Card getCard(int i) {
-		return playerCards.get(i);
-	}
-
 	public ArrayList<Card> getCards() {
 		return playerCards;
 	}
@@ -50,7 +40,7 @@ public class Hand {
 		ArrayList<String> sorted = new ArrayList<String>();
 
 		for (int i = 0; i < size(); i++) {
-			sorted.add(getCard(i).toString());
+			sorted.add(playerCards.get(i).toString());
 		}
 
 		Collections.sort(sorted);

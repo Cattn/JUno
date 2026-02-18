@@ -75,8 +75,9 @@ public class JUno {
                     }
 
                     System.out.println("Drew a playable card: " + lastDrawn.toColoredString());
-                    player.getHand().remove(lastDrawn);
+                    player.remove(lastDrawn);
                     game.checkActionCard(lastDrawn, input);
+                    System.out.println(player.handToString());
                     if (!lastDrawn.isWild() && !lastDrawn.isPlusFour()) {
                         System.out.print("Press Enter to continue...");
                         input.nextLine();
@@ -87,7 +88,7 @@ public class JUno {
 
                 System.out.println("The top card is: " + game.getTopCard().toColoredString());
 
-                System.out.println(player.getHand().toString());
+                System.out.println(player.handToString());
 
                 if (player.getCards().size() > 1) {
                     System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size()
@@ -114,10 +115,10 @@ public class JUno {
                     game.drawCard(player);
                     turnComplete = true;
                 } else {
-                    Card card = player.getHand().find(move.trim().toUpperCase());
+                    Card card = player.find(move.trim().toUpperCase());
                     if (card != null) {
                         if (game.isValidMove(card)) {
-                            player.getHand().remove(card);
+                            player.remove(card);
                             game.checkActionCard(card, input);
                             turnComplete = true;
                         } else {
@@ -129,7 +130,7 @@ public class JUno {
                             if (idx > 0 && idx <= player.getCards().size()) {
                                 Card cardByIdx = player.getCards().get(idx - 1);
                                 if (game.isValidMove(cardByIdx)) {
-                                    player.getHand().remove(cardByIdx);
+                                    player.remove(cardByIdx);
                                     game.checkActionCard(cardByIdx, input);
                                     turnComplete = true;
                                 } else {

@@ -20,10 +20,6 @@ public class Player {
 		return hand.getCards();
 	}
 
-	public Hand getHand() {
-		return hand;
-	}
-
 	public int getPlayerID() {
 		return playerID;
 	}
@@ -36,7 +32,15 @@ public class Player {
 		return getCards().isEmpty();
 	}
 
-	public void printCards() {
-		System.out.println(getCards());
+	public void remove(Card c) {
+		hand.remove(c);
+	}
+
+	public Card find(String card) {
+		return hand.find(card);
+	}
+
+	public String handToString() {
+		return hand.toString();
 	}
 }
