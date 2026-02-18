@@ -191,9 +191,9 @@ public class JUno {
         return colorCode + text + ConsoleColors.RESET;
     }
 
-    private static boolean hasPlayableCard(Game game, Player player) {
-        for (Card card : player.getCards()) {
-            if (game.isValidMove(card)) {
+    private static boolean hasPlayableCard(Game g, Player p) {
+        for (Card card : p.getCards()) {
+            if (g.isValidMove(card)) {
                 return true;
             }
         }
