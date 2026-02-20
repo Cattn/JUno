@@ -67,7 +67,7 @@ public class JUno {
             clearScreen();
 
             while (!turnComplete) {
-                if (!hasPlayableCard(game, player)) {
+                if (!player.hasPlayableCard(game)) {
                     Card lastDrawn = null;
                     while (lastDrawn == null || !game.isValidMove(lastDrawn)) {
                         System.out.println("No playable cards. Drawing a card...");
@@ -189,14 +189,5 @@ public class JUno {
 
     public static String colorize(String text, String colorCode) {
         return colorCode + text + ConsoleColors.RESET;
-    }
-
-    private static boolean hasPlayableCard(Game g, Player p) {
-        for (Card card : p.getCards()) {
-            if (g.isValidMove(card)) {
-                return true;
-            }
-        }
-        return false;
     }
 }

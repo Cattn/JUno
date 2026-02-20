@@ -32,6 +32,15 @@ public class Player {
 		return getCards().isEmpty();
 	}
 
+	public boolean hasPlayableCard(Game g) {
+        for (Card card : getCards()) {
+            if (g.isValidMove(card)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
 	public void remove(Card c) {
 		hand.remove(c);
 	}
