@@ -8,6 +8,7 @@ import java.lang.NumberFormatException;
 public class JUno {
     public static ArrayList<Player> players = new ArrayList<Player>();
     public static Deck deck;
+    public static Game game;
 
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
@@ -53,7 +54,7 @@ public class JUno {
             players.add(player);
         }
 
-        Game game = new Game(players);
+        game = new Game(players);
         deck = new Deck(game);
         game.startGame(players);
 
