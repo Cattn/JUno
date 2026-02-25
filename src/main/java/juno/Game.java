@@ -5,7 +5,7 @@ import java.util.ArrayList;
 public class Game {
 
     private ArrayList<Player> players;
-    private Integer currentPlayerIndex;
+    private int currentPlayerIndex;
     private boolean isReversed;
     private Card topCard;
     private boolean isOver;
@@ -75,16 +75,12 @@ public class Game {
         this.topCard = card;
     }
 
-    public void reverseDirection() {
-        this.isReversed = !this.isReversed;
-    }
-
     public void skipTurn() {
         this.nextPlayer();
     }
 
     public void reverse() {
-        this.reverseDirection();
+        this.isReversed = !this.isReversed;
     }
 
     public boolean isGameOver() {
