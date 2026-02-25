@@ -3,10 +3,10 @@
 # JUno
 Java based Uno recreation for our CS2 Project at Wentworth Institute of Technology
 
-# Rules
+## Rules
 Regular Uno rules - https://service.mattel.com/instruction_sheets/42001pr.pdf
 
-# How to run the project
+## How to run the project
 
 1. Clone this repository
 2. Open the `src\main\java\juno` folder in the terminal
