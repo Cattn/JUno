@@ -1,24 +1,25 @@
 package juno;
 
 import java.util.ArrayList;
-import java.util.Scanner;
 
 public class Game {
 
     private ArrayList<Player> players;
     private Integer currentPlayerIndex;
     private boolean isReversed;
-    private Card topCard;
+    private Card topCard;   
     private boolean isOver;
 
-    public Game(ArrayList<Player> players) {
+    public Game(ArrayList<Player> players)
+    {
         this.players = players;
         this.currentPlayerIndex = 0;
         this.isReversed = false;
         this.isOver = false;
     }
 
-    public void startGame(ArrayList<Player> players) {
+    public void startGame(ArrayList<Player> players)
+    {
         this.players = players;
         this.isOver = false;
         for (Player player : players) {
@@ -37,28 +38,28 @@ public class Game {
             }
         } while (true);
     }
-
-    public Card drawCard(Player player) {
-        Card drawn = JUno.deck.draw();
-        if (drawn != null) {
-            player.getCards().add(drawn);
-        }
-        return drawn;
+    
+    public void drawCard(Player player)
+    {
+        player.getCards().add(JUno.deck.draw());
     }
 
-    public void drawTwoCards(Player player) {
-        drawCard(player);
-        drawCard(player);
+    public void drawTwoCards(Player player)
+    {
+        player.getCards().add(JUno.deck.draw());
+        player.getCards().add(JUno.deck.draw());
     }
 
-    public void drawFourCards(Player player) {
-        drawCard(player);
-        drawCard(player);
-        drawCard(player);
-        drawCard(player);
+    public void drawFourCards(Player player)
+    {
+        player.getCards().add(JUno.deck.draw());
+        player.getCards().add(JUno.deck.draw());
+        player.getCards().add(JUno.deck.draw());
+        player.getCards().add(JUno.deck.draw());
     }
 
-    public void nextPlayer() {
+    public void nextPlayer()
+    {
         if (this.isReversed) {
             this.currentPlayerIndex--;
         } else {
@@ -71,92 +72,48 @@ public class Game {
         }
     }
 
-    public int getCurrentPlayerIndex() {
-        return this.currentPlayerIndex;
+    public boolean isValidMove(Card card)
+    {
+        return card.getColor().equals(topCard.getColor()) || card.getValue() == topCard.getValue() || card.toString().equals(topCard.toString());
     }
 
-    public void normalizeCurrentPlayerIndex() {
-        if (this.players.isEmpty()) {
-            return;
-        }
-        if (this.currentPlayerIndex >= this.players.size()) {
-            this.currentPlayerIndex = 0;
-        } else if (this.currentPlayerIndex < 0) {
-            this.currentPlayerIndex = this.players.size() - 1;
-        }
-    }
-
-    public boolean isValidMove(Card card) {
-        if (card.isWild()) {
-            return true;
-        }
-        return card.getColor().equals(topCard.getColor()) || card.getValue() == topCard.getValue();
-    }
-
-    public void setTopCard(Card card) {
+    public void setTopCard(Card card)
+    {
         this.topCard = card;
     }
 
-    public void reverse() {
+    public void reverseDirection()
+    {
         this.isReversed = !this.isReversed;
-        if (this.players.size() == 2) {
-            // Reverse acts like skip in 2-player games.
-            this.nextPlayer();
-        }
     }
 
-    public void skipTurn() {
+    public void skipTurn()
+    {
         this.nextPlayer();
     }
 
-    public void checkActionCard(Card c, Scanner s) {
-        String cardStr = c.toString();
-        if (c.isWild()) {
-            if (c.isPlusFour()) {
-                this.nextPlayer();
-                this.drawFourCards(this.players.get(this.currentPlayerIndex));
-                System.out.println(this.players.get(this.currentPlayerIndex).getPlayerName()
-                        + " draws 4 cards and skips their turn!");
-            }
-            c.setColor(promptForColor(s));
-        } else if (cardStr.endsWith("R")) {
-            this.reverse();
-        } else if (cardStr.endsWith("S")) {
-            this.skipTurn();
-        } else if (cardStr.endsWith("P")) {
-            this.nextPlayer();
-            this.drawTwoCards(this.players.get(this.currentPlayerIndex));
-            System.out.println(
-                    this.players.get(this.currentPlayerIndex).getPlayerName() + " draws 2 cards and skips their turn!");
-        }
-        this.setTopCard(c);
+    public void reverse()
+    {
+        this.reverseDirection();
     }
 
-    private String promptForColor(Scanner s) {
-        String color;
-        while (true) {
-            System.out.print("Choose a color (R, G, B, Y): ");
-            color = s.nextLine().trim().toUpperCase();
-            if (color.matches("[RGBY]"))
-                break;
-            System.out.println("Invalid color.");
-        }
-        return color;
-    }
-
-    public boolean isGameOver() {
+    public boolean isGameOver()
+    {
         return isOver || players.size() <= 1;
     }
 
-    public void endGame() {
+    public void endGame()
+    {
         this.isOver = true;
     }
 
-    public ArrayList<Player> getPlayers() {
+    public ArrayList<Player> getPlayers()
+    {
         return players;
     }
 
-    public Card getTopCard() {
+    public Card getTopCard()
+    {
         return topCard;
     }
 }
