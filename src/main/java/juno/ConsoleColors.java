@@ -7,5 +7,5 @@ public class ConsoleColors
     public static final String GREEN = "\u001B[32m";
     public static final String YELLOW = "\u001B[33m";
     public static final String BLUE = "\u001B[34m";
-    public static final String WHITE = "\u001B[37m";    
+    public static final String WHITE = "\u001B[37m";
 }
