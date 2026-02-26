@@ -129,6 +129,6 @@ public class Card {
                 break;
         }
 
-        return JUno.colorize(cardStr, colorCode);
+        return ConsoleColors.colorize(cardStr, colorCode);
     }
 }

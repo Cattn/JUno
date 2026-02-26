@@ -187,8 +187,4 @@ public class JUno {
             System.out.print("\n".repeat(50));
         }
     }
-
-    public static String colorize(String text, String colorCode) {
-        return colorCode + text + ConsoleColors.RESET;
-    }
 }
