@@ -4,7 +4,8 @@
   "description": "Java based Uno recreation",
   "main": "src/main/java/juno/JUno.java",
   "scripts": {
-    "dev": "nodemon --watch src --ext java --exec \"mvn compile exec:java -Dexec.mainClass=juno.JUno -q\""
+    "dev": "nodemon --watch src --ext java --exec \"mvn compile exec:java -Dexec.mainClass=juno.JUno -q\"",
+    "start": "mvn compile exec:java -Dexec.mainClass=juno.JUno -q"
   },
   "devDependencies": {
     "nodemon": "^3.0.0"

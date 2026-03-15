@@ -1,6 +1,7 @@
 package juno;
 
 import java.util.ArrayList;
+import java.util.Objects;
 import java.util.Scanner;
 
 public class Game {
@@ -87,10 +88,13 @@ public class Game {
     }
 
     public boolean isValidMove(Card card) {
+        if (card == null || topCard == null) {
+            return false;
+        }
         if (card.isWild()) {
             return true;
         }
-        return card.getColor().equals(topCard.getColor()) || card.getValue() == topCard.getValue();
+        return Objects.equals(card.getColor(), topCard.getColor()) || card.getValue() == topCard.getValue();
     }
 
     public void setTopCard(Card card) {

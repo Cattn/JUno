@@ -15,6 +15,7 @@ public class JUno {
 
         clearScreen();
         System.out.println("Welcome to JUno!\n");
+        System.out.println("This game follows the standard Uno rules. To choose a card, type the position of the card in your hand or the card itself (e.g. R5, GS, P4).\n");
 
         boolean numPlayersCorrect = false;
 
@@ -70,15 +71,18 @@ public class JUno {
             while (!turnComplete) {
                 if (!player.hasPlayableCard(game)) {
                     Card lastDrawn = null;
+                    int cardsDrawn = 0;
                     while (lastDrawn == null || !game.isValidMove(lastDrawn)) {
-                        System.out.println("No playable cards. Drawing a card...");
                         lastDrawn = game.drawCard(player);
+                        cardsDrawn++;
                     }
-
+                    if (player.getCards().size() > 0) {
+                        System.out.println("No playable cards. Drew " + cardsDrawn + " cards.");
+                    }
                     System.out.println("Drew a playable card: " + lastDrawn.toColoredString());
                     player.remove(lastDrawn);
-                    game.checkActionCard(lastDrawn, input);
                     System.out.println(player.handToString());
+                    game.checkActionCard(lastDrawn, input);
                     if (!lastDrawn.isWild() && !lastDrawn.isPlusFour()) {
                         System.out.print("Press Enter to continue...");
                         input.nextLine();
@@ -95,8 +99,8 @@ public class JUno {
                     System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size()
                             + ", 0 to draw a card): ");
                 } else {
-                    System.out.print(player.getPlayerName()
-                            + ", enter your move (1 to play your last card, 0 to draw a card): ");
+                    System.out.println("UNO!");
+                    System.out.print(player.getPlayerName() + ", enter your move (1 to play your last card, 0 to draw a card): ");
                 }
 
                 String move;
@@ -114,7 +118,7 @@ public class JUno {
 
                 if (move.equals("0")) {
                     game.drawCard(player);
-                    turnComplete = true;
+                    clearScreen();
                 } else {
                     Card card = player.find(move.trim().toUpperCase());
                     if (card != null) {
