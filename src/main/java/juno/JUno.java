@@ -10,6 +10,13 @@ public class JUno {
     public static Deck deck;
     public static Game game;
 
+    /**
+     * Main method that starts the JUno game.
+     * Handles player setup, game initialization, and the main game loop.
+     * Players take turns playing cards according to Uno rules until a winner is determined.
+     *
+     * @param args Command line arguments (not used)
+     */
     public static void main(String[] args) {
         Scanner input = new Scanner(System.in);
 
@@ -178,6 +185,11 @@ public class JUno {
         input.close();
     }
 
+    /**
+     * Clears the console screen in a platform-independent way.
+     * Uses the native command for Windows (cls) or Unix-like systems (ANSI escape codes).
+     * Falls back to printing blank lines if neither method works.
+     */
     public static void clearScreen() {
         String osName = System.getProperty("os.name").toLowerCase();
         try {
