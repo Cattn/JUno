@@ -9,16 +9,13 @@ import java.util.Collections;
  */
 public class Deck {
     private ArrayList<Card> deck = new ArrayList<Card>();
-    private Game game;
 
     /**
      * Creates and initializes a new deck with 3 copies of each card.
      * The deck is shuffled after initialization.
      *
-     * @param game The game instance (used for deck replenishment logic)
      */
-    public Deck(Game game) {
-        this.game = game;
+    public Deck() {
         for(int i = 0; i < 3; i++) {
             for (int j = 0; j < Card.cards.length; j++) {
                 deck.add(new Card(Card.cards[j]));
@@ -30,25 +27,14 @@ public class Deck {
 
     /**
      * Draws a card from the top of the deck.
-     * If the deck becomes empty, it is replenished with new cards (excluding the top card).
      *
-     * @return The drawn card, or null if replenishment fails
+     * @return The drawn card, or null if the deck is empty
      */
     public Card draw() {
         if (!deck.isEmpty()) {
             return deck.remove(0);
-        } else {
-            for (int i = 0; i < Card.cards.length; i++) {
-                if (!Card.cards[i].equals(game.getTopCard().toString())) {
-                    this.add(new Card(Card.cards[i]));
-                    break;
-                }
-            }
-            if (deck.isEmpty()) {
-                return null;
-            }
-            return deck.remove(0);
         }
+        return null;
     }
 
     /**

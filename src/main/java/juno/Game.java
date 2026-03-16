@@ -16,14 +16,16 @@ public class Game {
     private boolean isReversed;
     private Card topCard;
     private boolean isOver;
+    private Deck deck;
 
     /**
      * Creates a new game instance with the given players.
      *
      * @param players The list of players participating in the game
      */
-    public Game(ArrayList<Player> players) {
+    public Game(ArrayList<Player> players, Deck deck) {
         this.players = players;
+        this.deck = deck;
         this.currentPlayerIndex = 0;
         this.isReversed = false;
         this.isOver = false;
@@ -34,21 +36,18 @@ public class Game {
      * Ensures the initial top card is not an action card.
      *
      * @param players The list of players in the game
-     * @throws IllegalStateException if the deck becomes empty during initialization
      */
     public void startGame(ArrayList<Player> players) {
         this.players = players;
         this.isOver = false;
         for (Player player : players) {
-            JUno.deck.dealCards(player);
+            deck.dealCards(player);
         }
         Card c;
         do {
-            c = JUno.deck.draw();
-            if (c == null)
-                throw new IllegalStateException("Deck empty at game start");
+            c = drawFromDeck();
             if (c.isActionCard())
-                JUno.deck.add(c);
+                deck.add(c);
             else {
                 this.topCard = c;
                 break;
@@ -63,11 +62,33 @@ public class Game {
      * @return The drawn card, or null if the deck is empty
      */
     public Card drawCard(Player player) {
-        Card drawn = JUno.deck.draw();
+        Card drawn = drawFromDeck();
         if (drawn != null) {
             player.getCards().add(drawn);
         }
         return drawn;
+    }
+
+    /**
+     * Draws from the deck and applies fallback rebuild logic when empty.
+     * Rebuild avoids adding the current top card as the immediate replacement.
+     *
+     * @return A drawn card, or null if no fallback card can be created
+     */
+    private Card drawFromDeck() {
+        Card drawn = deck.draw();
+        if (drawn != null) {
+            return drawn;
+        }
+
+        for (int i = 0; i < Card.cards.length; i++) {
+            if (topCard == null || !Card.cards[i].equals(topCard.toString())) {
+                deck.add(new Card(Card.cards[i]));
+                break;
+            }
+        }
+
+        return deck.draw();
     }
 
     /**
