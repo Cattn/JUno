@@ -6,6 +6,10 @@ import java.util.InputMismatchException;
 import java.lang.NumberFormatException;
 
 public class JUno {
+    private static ArrayList<Player> players = new ArrayList<Player>();
+    private static Deck deck;
+    private static Game game;
+
     /**
      * Main method that starts the JUno game.
      * Handles player setup, game initialization, and the main game loop.
@@ -14,8 +18,6 @@ public class JUno {
      * @param args Command line arguments (not used)
      */
     public static void main(String[] args) {
-        ArrayList<Player> players = new ArrayList<Player>();
-
         Scanner input = new Scanner(System.in);
 
         clearScreen();
@@ -61,8 +63,8 @@ public class JUno {
         }
 
         
-        Deck deck = new Deck();
-        Game game = new Game(players, deck);
+        deck = new Deck();
+        game = new Game(players, deck);
         game.startGame(players);
 
         while (!game.isGameOver()) {
