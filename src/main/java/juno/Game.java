@@ -167,7 +167,6 @@ public class Game {
     public void reverse() {
         this.isReversed = !this.isReversed;
         if (this.players.size() == 2) {
-            // Reverse acts like skip in 2-player games.
             this.nextPlayer();
         }
     }
