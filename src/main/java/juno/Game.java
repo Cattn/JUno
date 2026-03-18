@@ -7,7 +7,8 @@ import java.util.Scanner;
 /**
  * Manages the game state and rules for a game of Uno.
  * Tracks players, whose turn it is, the current top card, and game progression.
- * Enforces Uno rules including valid moves, action card effects, and turn order.
+ * Enforces Uno rules including valid moves, action card effects, and turn
+ * order.
  */
 public class Game {
 
@@ -32,7 +33,8 @@ public class Game {
     }
 
     /**
-     * Initializes the game by dealing 7 cards to each player and drawing the initial top card.
+     * Initializes the game by dealing 7 cards to each player and drawing the
+     * initial top card.
      * Ensures the initial top card is not an action card.
      *
      * @param players The list of players in the game
@@ -157,7 +159,8 @@ public class Game {
 
     /**
      * Determines if a card can be legally played on the current top card.
-     * A move is valid if: the card is wild, or it matches the top card's color or value.
+     * A move is valid if: the card is wild, or it matches the top card's color or
+     * value.
      *
      * @param card The card to validate
      * @return true if the move is valid, false otherwise
@@ -251,7 +254,8 @@ public class Game {
 
     /**
      * Checks if the game has ended.
-     * The game is over if there is only one player remaining or the players decide to end the game after a player has won.
+     * The game is over if there is only one player remaining or the players decide
+     * to end the game after a player has won.
      *
      * @return true if the game is over, false otherwise
      */

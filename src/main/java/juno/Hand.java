@@ -35,7 +35,7 @@ public class Hand {
 		playerCards.remove(c);
 	}
 
-		/**
+	/**
 	 * Searches for a card in the hand by its string representation.
 	 *
 	 * @param card The card string to find (e.g., "R5", "GS")

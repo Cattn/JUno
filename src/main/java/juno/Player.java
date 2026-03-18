@@ -73,13 +73,13 @@ public class Player {
 	 * @return true if a playable card exists, false otherwise
 	 */
 	public boolean hasPlayableCard(Game g) {
-        for (Card card : getCards()) {
-            if (g.isValidMove(card)) {
-                return true;
-            }
-        }
-        return false;
-    }
+		for (Card card : getCards()) {
+			if (g.isValidMove(card)) {
+				return true;
+			}
+		}
+		return false;
+	}
 
 	/**
 	 * Removes a card from the player's hand.

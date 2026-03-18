@@ -1,7 +1,8 @@
 package juno;
 
 /**
- * Represents a single Uno card with color, value, and optional user-chosen color for wild cards.
+ * Represents a single Uno card with color, value, and optional user-chosen
+ * color for wild cards.
  * Card values are encoded as strings (e.g., "R5", "GS", "W", "P4"):
  * - First character: Color (G=Green, R=Red, B=Blue, Y=Yellow)
  * - Second character: Value (0-9, R=Reverse, S=Skip, P=Plus Two)
@@ -12,7 +13,12 @@ public class Card {
     private String chosenColor;
 
     public static String[] cards = {
-            "G0", "R0", "B0", "Y0", "G1", "R1", "B1", "Y1", "G1", "R1", "B1", "Y1", "G2", "R2", "B2", "Y2", "G2", "R2", "B2", "Y2", "G3", "R3", "B3", "Y3", "G3", "R3", "B3", "Y3", "G4", "R4", "B4", "Y4", "G4", "R4", "B4", "Y4", "G5", "R5", "B5", "Y5", "G5", "R5", "B5", "Y5", "G6", "R6", "B6", "Y6", "G6", "R6", "B6", "Y6", "G7", "R7", "B7", "Y7", "G7", "R7", "B7", "Y7", "G8", "R8", "B8", "Y8", "G8", "R8", "B8", "Y8", "G9", "R9", "B9", "Y9", "G9", "R9", "B9", "Y9", "W", "W", "W", "W", "GR", "RR", "BR", "YR", "GR", "RR", "BR", "YR", "GS", "RS", "BS", "YS", "GS", "RS", "BS", "YS", "P4", "P4", "P4", "P4", "GP", "RP", "BP", "YP", "GP", "RP", "BP", "YP"
+        "G0", "R0", "B0", "Y0", "G1", "R1", "B1", "Y1", "G1", "R1", "B1", "Y1", "G2", "R2", "B2", "Y2", "G2", "R2",
+        "B2", "Y2", "G3", "R3", "B3", "Y3", "G3", "R3", "B3", "Y3", "G4", "R4", "B4", "Y4", "G4", "R4", "B4", "Y4",
+        "G5", "R5", "B5", "Y5", "G5", "R5", "B5", "Y5", "G6", "R6", "B6", "Y6", "G6", "R6", "B6", "Y6", "G7", "R7",
+        "B7", "Y7", "G7", "R7", "B7", "Y7", "G8", "R8", "B8", "Y8", "G8", "R8", "B8", "Y8", "G9", "R9", "B9", "Y9",
+        "G9", "R9", "B9", "Y9", "W", "W", "W", "W", "GR", "RR", "BR", "YR", "GR", "RR", "BR", "YR", "GS", "RS",
+        "BS", "YS", "GS", "RS", "BS", "YS", "P4", "P4", "P4", "P4", "GP", "RP", "BP", "YP", "GP", "RP", "BP", "YP"
     };
 
     /**
@@ -65,7 +71,8 @@ public class Card {
 
     /**
      * Gets the numeric value of this card.
-     * Maps special cards to values: Reverse=10, Skip=11, Plus Two=12, Wild=13, Plus Four=14.
+     * Maps special cards to values: Reverse=10, Skip=11, Plus Two=12, Wild=13, Plus
+     * Four=14.
      * Number cards return their face value (0-9).
      *
      * @return The numeric value of the card
@@ -90,7 +97,8 @@ public class Card {
     }
 
     /**
-     * Checks if this card is an action card (Reverse, Skip, Plus Two, Wild, or Plus Four).
+     * Checks if this card is an action card (Reverse, Skip, Plus Two, Wild, or Plus
+     * Four).
      *
      * @return true if the card value is 10 or higher, false otherwise
      */
@@ -150,9 +158,11 @@ public class Card {
     }
 
     /**
-     * Returns the display string for this card, accounting for user-chosen colors on wild cards.
+     * Returns the display string for this card, accounting for user-chosen colors
+     * on wild cards.
      *
-     * @return The display string (e.g., "R5", "WG" for wild with green, "PY" for plus four with yellow)
+     * @return The display string (e.g., "R5", "WG" for wild with green, "PY" for
+     *         plus four with yellow)
      */
     public String toDisplayString() {
         if (card < 0 || card >= cards.length) {

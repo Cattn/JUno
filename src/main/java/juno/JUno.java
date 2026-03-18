@@ -13,7 +13,8 @@ public class JUno {
     /**
      * Main method that starts the JUno game.
      * Handles player setup, game initialization, and the main game loop.
-     * Players take turns playing cards according to Uno rules until a winner is determined.
+     * Players take turns playing cards according to Uno rules until a winner is
+     * determined.
      *
      * @param args Command line arguments (not used)
      */
@@ -22,7 +23,8 @@ public class JUno {
 
         clearScreen();
         System.out.println("Welcome to JUno!\n");
-        System.out.println("This game follows the standard Uno rules. To choose a card, type the position of the card in your hand or the card itself (e.g. R5, GS, P4).\n");
+        System.out.println(
+                "This game follows the standard Uno rules. To choose a card, type the position of the card in your hand or the card itself (e.g. R5, GS, P4).\n");
 
         boolean numPlayersCorrect = false;
 
@@ -31,12 +33,12 @@ public class JUno {
         while (!numPlayersCorrect) {
             System.out.print("Enter number of players: ");
             String playerInput = input.nextLine().trim();
-            
+
             if (playerInput.isEmpty()) {
                 System.out.println("Invalid input. Please enter a number.");
                 continue;
             }
-            
+
             try {
                 numPlayers = Integer.parseInt(playerInput);
                 if (numPlayers >= 2 && numPlayers <= 10) {
@@ -54,7 +56,7 @@ public class JUno {
         for (int i = 1; i <= numPlayers; i++) {
             System.out.print("Enter name for Player " + i + ": ");
             String name = input.nextLine();
-            if(name.trim().isEmpty()) {
+            if (name.trim().isEmpty()) {
                 name = "Player " + i;
             }
             Player player = new Player(i);
@@ -62,7 +64,6 @@ public class JUno {
             players.add(player);
         }
 
-        
         deck = new Deck();
         game = new Game(players, deck);
         game.startGame(players);
@@ -105,10 +106,11 @@ public class JUno {
 
                 if (player.getCards().size() > 1) {
                     System.out.print(player.getPlayerName() + ", enter your move (1-" + player.getCards().size()
-                            + ", 0 to draw a card): ");
+                            + " OR type the card abbreviation, 0 to draw a card): ");
                 } else {
                     System.out.println("UNO!");
-                    System.out.print(player.getPlayerName() + ", enter your move (1 to play your last card, 0 to draw a card): ");
+                    System.out.print(player.getPlayerName()
+                            + ", enter your move (1 to play your last card OR type the card abbreviation, 0 to draw a card): ");
                 }
 
                 String move;
@@ -188,7 +190,8 @@ public class JUno {
 
     /**
      * Clears the console screen in a platform-independent way.
-     * Uses the native command for Windows (cls) or Unix-like systems (ANSI escape codes).
+     * Uses the native command for Windows (cls) or Unix-like systems (ANSI escape
+     * codes).
      * Falls back to printing blank lines if neither method works.
      */
     public static void clearScreen() {
