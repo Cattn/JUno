@@ -4,8 +4,7 @@ package juno;
  * Utility class for console color output using ANSI escape codes.
  * Provides color constants and a method to colorize text for terminal display.
  */
-public class ConsoleColors
-{
+public class ConsoleColors {
     public static final String RESET = "\u001B[0m";
     public static final String RED = "\u001B[31m";
     public static final String GREEN = "\u001B[32m";
