@@ -6,9 +6,9 @@ import java.util.InputMismatchException;
 import java.lang.NumberFormatException;
 
 public class JUno {
-    public static ArrayList<Player> players = new ArrayList<Player>();
-    public static Deck deck;
-    public static Game game;
+    private static ArrayList<Player> players = new ArrayList<Player>();
+    private static Deck deck;
+    private static Game game;
 
     /**
      * Main method that starts the JUno game.
@@ -62,8 +62,9 @@ public class JUno {
             players.add(player);
         }
 
-        game = new Game(players);
-        deck = new Deck(game);
+        
+        deck = new Deck();
+        game = new Game(players, deck);
         game.startGame(players);
 
         while (!game.isGameOver()) {
